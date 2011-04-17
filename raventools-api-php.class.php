@@ -98,8 +98,8 @@ class RavenTools {
    *
    * @param string $method - One of the available objects from the Raven API
    */
-  private function setMethod($method) {	
-	
+  private function setMethod($method) { 
+  
     switch ($method) {
 
       case 'rank':
@@ -162,7 +162,7 @@ class RavenTools {
    * @param string $options - Options passed from get(), getJSON() or getXML()
    * @return object/string/boolean - Response from query or false
    */
-  private function get_response($options = array()) {	
+  private function get_response($options = array()) { 
     $url = $this->build_request_url($options);
     if ($this->hasErrors() == false) {
       $response = $this->curl($url);
@@ -268,15 +268,15 @@ class RavenTools {
     return $this->response;
   }
 
-	/**
-	 * Add Error
-	 *
-	 * Adds an error to the $errors array
-	 *
-	 * @param string $key - Unique identifier for error message
-	 * @param string $msg - Text message for error
-	 * @return void
-	 */
+  /**
+   * Add Error
+   *
+   * Adds an error to the $errors array
+   *
+   * @param string $key - Unique identifier for error message
+   * @param string $msg - Text message for error
+   * @return void
+   */
   private function addError($key, $msg) {
     $this->errors[$key] = $msg;
   }
