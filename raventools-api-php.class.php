@@ -8,8 +8,11 @@
  */
 class RavenTools {
   
+  const api_version = '1.0';
+  const end_point = 'http://raven-seo-tools.com/api';
+
   private $api_key;
-  private $end_point;
+
   public $method;
   public $domain;
   public $start_date;
@@ -26,7 +29,6 @@ class RavenTools {
   function __construct($api_key = null) {
     $this->api_key = $api_key;
       if (empty($api_key)) { die('You must provide an API key for the desired Raven Tools profile.'); }
-    $this->end_point = 'http://raven-seo-tools.com/api';
     $this->format = 'json';
     $this->required_fields = array();
     $this->optional_fields = array();
@@ -204,7 +206,7 @@ class RavenTools {
     $this->check_required();
 
     // Begin building the URL for the request
-    $url = $this->end_point . '?key=' . $this->api_key . '&method=' . $this->method;
+    $url = self::end_point . '?key=' . $this->api_key . '&method=' . $this->method;
     foreach ($this->required_fields as $field) {
       $url = $url . '&' . $field . '=' . urlencode($this->$field);
     }
@@ -260,8 +262,7 @@ class RavenTools {
    */
   private function parse_response($response) {
     $this->response = $response;
-    if ($this->response == '') {
-      $this->response = 'no-response';
+    if (empty($this->response)) {
       $this->addError('raven_empty_response', "The request for '{$this->request}' returned an empty response.");
     }
     return $this->response;
