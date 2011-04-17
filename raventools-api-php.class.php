@@ -28,7 +28,6 @@ class RavenTools {
       if (empty($api_key)) { die('You must provide an API key for the desired Raven Tools profile.'); }
     $this->end_point = 'http://raven-seo-tools.com/api';
     $this->format = 'json';
-    $this->engine = 'google';
     $this->required_fields = array();
     $this->optional_fields = array();
     $this->errors = array();
@@ -201,7 +200,7 @@ class RavenTools {
       $this->$key = $value;
     }
     
-    // Verify that every required attribute was specified, send to $Errors if not
+    // Verify that every required attribute was specified, send to $errors array if not
     $this->check_required();
 
     // Begin building the URL for the request

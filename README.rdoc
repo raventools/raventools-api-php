@@ -13,7 +13,7 @@ With the new $Raven instance, we now have three different options for pulling in
 
 The 'get()' method calls the 'getJSON()' method, and then parses the JSON response into a PHP object. For ease of use, this is probably the one you will most likely need unless you are setting up another layer, such as an AJAX loader.
 
-=== getJSON
+=== getJSON()
 
   $responseString = $Raven->getJSON($method, $options);
 

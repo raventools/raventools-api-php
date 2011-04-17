@@ -1,8 +1,8 @@
 <?php
 
-require ('raventools-php.class.php');
+require ('raventools-api-php.class.php');
 
-$api_key = ''; // Set your API key here
+$api_key = 'CA6BF2A26D3B264D'; // Set your API key here
 $Raven = new RavenTools($api_key);
 
 $keyword = 'web design nashville';
@@ -36,7 +36,7 @@ print '<h3>Test Results</h3>';
 
 print '<hr />';
 
-$rank = $Raven->get('rank', array('keyword'=>$keyword,'domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date));
+$rank = $Raven->get('rank', array('keyword'=>$keyword,'domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date,'engine'=>'all'));
 print '<h3 id="rank">Rank (method:rank)</h3>';
 print '<p>Request: <tt>' . $Raven->request . '</tt></p>';
 print '<p>Response:</p>';
