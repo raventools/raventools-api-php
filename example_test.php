@@ -2,7 +2,7 @@
 
 require ('raventools-api-php.class.php');
 
-$api_key = 'CA6BF2A26D3B264D'; // Set your API key here
+$api_key = ''; // Set your API key here
 $Raven = new RavenTools($api_key);
 
 $keyword = 'web design nashville';
