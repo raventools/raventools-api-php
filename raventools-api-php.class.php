@@ -7,7 +7,7 @@
  * @package default
  */
 class RavenTools {
-  
+
   const api_version = '1.0';
   const end_point = 'http://raven-seo-tools.com/api';
 
@@ -25,7 +25,7 @@ class RavenTools {
   public $required_fields;
   public $optional_fields;
   public $errors;
-  
+
   function __construct($api_key = null) {
     $this->api_key = $api_key;
       if (empty($api_key)) { die('You must provide an API key for the desired Raven Tools profile.'); }
@@ -34,15 +34,15 @@ class RavenTools {
     $this->optional_fields = array();
     $this->errors = array();
   }
-  
+
   public function __set($name, $value) {
     $this->$name = $value;
   }
-  
+
   public function __get($name) {
     return $this->$name;
   }
-  
+
   /**
    * Get JSON
    *
@@ -70,7 +70,7 @@ class RavenTools {
     $response = $this->get_response($options);
     return (string) $response;
   }
-  
+
   /**
    * Get PHP Object
    *
@@ -83,12 +83,12 @@ class RavenTools {
     $response = $this->getJSON($method, $options);
     return json_decode($response);
   }
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   /* Private methods */
 
   /**
@@ -99,53 +99,62 @@ class RavenTools {
    * @param string $method - One of the available objects from the Raven API
    */
   private function setMethod($method) { 
-  
+
+    $this->method = $method;
+
     switch ($method) {
 
       case 'rank':
-        $this->method = $method;
         $this->required_fields = array('domain', 'keyword', 'start_date', 'end_date', 'engine');
       break;
 
       case 'rank_all':
-        $this->method = $method;
         $this->required_fields = array('domain', 'start_date');
       break;
 
       case 'domains':
-        $this->method = $method;
         $this->required_fields = array();
       break;
 
+      case 'add_domain':
+        $this->required_fields = array('domain', 'engine_id');
+      break;
+
+      case 'remove_domain':
+        $this->required_fields = array('domain');
+      break;
+
       case 'rank_max_week':
-        $this->method = $method;
         $this->required_fields = array('domain');
         $this->optional_fields = array('keyword');
       break;
 
       case 'engines':
-        $this->method = $method;
         $this->required_fields = array();
       break;
 
       case 'profile_info':
-        $this->method = $method;
         $this->required_fields = array();
       break;
 
       case 'domain_info':
-        $this->method = $method;
         $this->required_fields = array('domain');
       break;
 
       case 'competitors':
-        $this->method = $method;
         $this->required_fields = array('domain');
       break;
 
       case 'keywords':
-        $this->method = $method;
         $this->required_fields = array('domain');
+      break;
+
+      case 'add_keyword':
+        $this->required_fields = array('keyword', 'domain');
+      break;
+
+      case 'remove_keyword':
+        $this->required_fields = array('keyword', 'domain');
       break;
 
       default:
@@ -186,7 +195,7 @@ class RavenTools {
       }
     }
   }
-  
+
   /**
    * Build Request URL
    *
@@ -196,12 +205,12 @@ class RavenTools {
    * @return string - URL to be requested
    */
   private function build_request_url($options = array()) {
-    
+
     // Take the options array and set the properties
     foreach ($options as $key => $value) {
       $this->$key = $value;
     }
-    
+
     // Verify that every required attribute was specified, send to $errors array if not
     $this->check_required();
 
@@ -218,7 +227,7 @@ class RavenTools {
     $url = $url . '&format=' . $this->format;
 
     $this->request = $url;
-    
+
     // Return the request URL
     return $this->request;
   }
@@ -248,10 +257,10 @@ class RavenTools {
           trigger_error(curl_error($ch));
       }
       curl_close($ch);
-  
+
       return $result;
   }
-  
+
   /**
    * Parse Response
    *
@@ -280,7 +289,6 @@ class RavenTools {
   private function addError($key, $msg) {
     $this->errors[$key] = $msg;
   }
-
 
   /**
    * Has Errors
