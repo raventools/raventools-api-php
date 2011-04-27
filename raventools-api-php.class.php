@@ -85,7 +85,23 @@ class RavenTools {
   }
 
 
+  /* Static methods */
 
+  /**
+   * Validate API Key
+   *
+   * @param string $key - Key to be validated
+   * @return boolean - true upon success, false if no response
+   */
+  static function validateAPIKey($key) {
+    $testing = new self($key);
+    $result = $testing->get('domains');
+	if (is_array($result)) {
+		return true;
+	} else {
+		return false;
+	}
+  }
 
 
 
@@ -254,7 +270,7 @@ class RavenTools {
       curl_setopt_array($ch, ($options + $defaults));
       if( ! $result = curl_exec($ch))
       {
-          trigger_error(curl_error($ch));
+          //trigger_error(curl_error($ch));
       }
       curl_close($ch);
 
