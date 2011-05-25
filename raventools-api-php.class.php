@@ -35,6 +35,7 @@ class RavenTools {
     $this->errors = array();
   }
 
+
   public function __set($name, $value) {
     $this->$name = $value;
   }
@@ -42,6 +43,132 @@ class RavenTools {
   public function __get($name) {
     return $this->$name;
   }
+
+  /**
+   * Get Profile Info
+   *
+   * @return object
+   */
+  public function GetProfileInfo() {
+    return $this->get('profile_info');
+  }
+  
+  /**
+   * Get Domains
+   *
+   * @return object
+   */
+  public function GetDomains() {
+    return $this->get('domains');
+  }   
+
+  /**
+   * Get Engines
+   *
+   * @return object
+   */
+  public function GetEngines() {
+    return $this->get('engines');
+  }
+
+  /**
+   * Get Domain Info
+   *
+   * @param string $domain 
+   * @return object
+   */
+  public function GetDomainInfo( $domain ) {
+    if (empty($domain)):
+      return false;
+    endif;
+      
+    return $this->get('domain_info', array('domain'=>$domain));
+  }
+
+  /**
+   * Get Rank
+   *
+   * @param string $keyword 
+   * @param string $domain 
+   * @param string $start_date 
+   * @param string $end_date 
+   * @param string $engine 
+   * @return object
+   */
+  public function GetRank( $keyword, $domain, $start_date, $end_date, $engine='all' ) {
+    if ( !isset($keyword, $domain, $start_date, $end_date) || empty($domain) || empty($keyword) ):
+      return false;
+    endif;
+    
+    $start_date = date('Y-m-d', strtotime($start_date));
+    $end_date = date('Y-m-d', strtotime($end_date));
+    
+    return $this->get('rank', array('keyword'=>$keyword,'domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date,'engine'=>$engine) );
+  }
+  
+  /**
+   * Get Ranking for All Keywords
+   *
+   * @param string $domain 
+   * @param string $start_date 
+   * @param string $end_date 
+   * @return object
+   */
+  public function GetRankAll( $domain, $start_date, $end_date ) {
+    if ( !isset($domain, $start_date, $end_date) || empty($domain) ):
+      return false;
+    endif;
+    
+    $start_date = date('Y-m-d', strtotime($start_date));
+    $end_date = date('Y-m-d', strtotime($end_date));
+    
+    return $this->get('rank_all', array('domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date) );
+  }
+  
+  /**
+   * Get Ranking Max for a Week
+   *
+   * @param string $domain 
+   * @param string $keyword 
+   * @return object
+   */
+  public function GetRankMaxWeek( $domain, $keyword ) {
+    if ( !isset($domain, $keyword) || empty($domain) || empty($keyword) ):
+      return false;
+    endif;
+    
+    return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword));   
+  }
+  
+  /**
+   * Get Competitors
+   *
+   * @param string $domain 
+   * @return object
+   */
+  public function GetCompetitiors( $domain ) {
+    if ( !isset($domain) || empty($domain) ):
+      return false;
+    endif;
+    
+    return $this->get('competitors', array('domain'=>$domain));
+  }
+  
+  /**
+   * Get Keyword
+   *
+   * @param string $domain 
+   * @return object
+   */
+  public function GetKeywords( $domain ) {
+    if ( !isset($domain) || empty($domain) ):
+      return false;
+    endif;
+
+    return $this->get('keywords', array('domain'=>$domain));
+  }
+
+  /* Core query methods */
 
   /**
    * Get JSON
@@ -76,7 +203,7 @@ class RavenTools {
    *
    * @param string $method - defines specific method to query (part of query string, sets required fields)
    * @param array $options - defines options to be passed to query string
-   * @return array - decoded JSON response
+   * @return object - decoded JSON response
    */
   public function get($method, $options = array()) {
     $this->setMethod($method);
@@ -96,11 +223,11 @@ class RavenTools {
   static function validateAPIKey($key) {
     $testing = new self($key);
     $result = $testing->get('domains');
-	if (is_array($result)) {
+	if (is_array($result)):
 		return true;
-	} else {
+	else:
 		return false;
-	}
+	endif;
   }
 
 
@@ -118,7 +245,7 @@ class RavenTools {
 
     $this->method = $method;
 
-    switch ($method) {
+    switch ($method):
 
       case 'rank':
         $this->required_fields = array('domain', 'keyword', 'start_date', 'end_date', 'engine');
@@ -176,7 +303,8 @@ class RavenTools {
       default:
         $this->addError('raven_invalid_method', "'{$method}' was not recognized as a valid method.");
         break;
-    }
+    
+    endswitch;
   }
   
   /**
@@ -187,14 +315,14 @@ class RavenTools {
    * @param string $options - Options passed from get(), getJSON() or getXML()
    * @return object/string/boolean - Response from query or false
    */
-  private function get_response($options = array()) { 
+  private function get_response($options = array()) {
     $url = $this->build_request_url($options);
-    if ($this->hasErrors() == false) {
+    if ($this->hasErrors() == false):
       $response = $this->curl($url);
       return $this->parse_response($response);
-    } else {
+    else:
       return false;
-    }
+    endif;
   }
   
   /**
@@ -206,9 +334,9 @@ class RavenTools {
    */
   private function check_required() {
     foreach($this->required_fields as $field) {
-      if (!isset($this->$field) || empty($this->$field)) {
+      if (!isset($this->$field) || empty($this->$field)):
         $this->addError('raven_missing_required_field', "The '{$field}' was not set as part of this request. Required by '{$this->method}' method.");
-      }
+      endif;
     }
   }
 
@@ -223,23 +351,23 @@ class RavenTools {
   private function build_request_url($options = array()) {
 
     // Take the options array and set the properties
-    foreach ($options as $key => $value) {
+    foreach ($options as $key => $value):
       $this->$key = $value;
-    }
+    endforeach;
 
     // Verify that every required attribute was specified, send to $errors array if not
     $this->check_required();
 
     // Begin building the URL for the request
     $url = self::end_point . '?key=' . $this->api_key . '&method=' . $this->method;
-    foreach ($this->required_fields as $field) {
+    foreach ($this->required_fields as $field):
       $url = $url . '&' . $field . '=' . urlencode($this->$field);
-    }
-    foreach ($this->optional_fields as $field) {
-      if (!empty($this->$field)) {
+    endforeach;
+    foreach ($this->optional_fields as $field):
+      if (!empty($this->$field)):
         $url = $url . '&' . $field . '=' . urlencode($this->$field);
-      }
-    }
+      endif;
+    endforeach;
     $url = $url . '&format=' . $this->format;
 
     $this->request = $url;
@@ -268,10 +396,9 @@ class RavenTools {
 
       $ch = curl_init();
       curl_setopt_array($ch, ($options + $defaults));
-      if( ! $result = curl_exec($ch))
-      {
+      if( ! $result = curl_exec($ch)):
           //trigger_error(curl_error($ch));
-      }
+      endif;
       curl_close($ch);
 
       return $result;
@@ -287,9 +414,9 @@ class RavenTools {
    */
   private function parse_response($response) {
     $this->response = $response;
-    if (empty($this->response)) {
+    if (empty($this->response)):
       $this->addError('raven_empty_response', "The request for '{$this->request}' returned an empty response.");
-    }
+    endif;
     return $this->response;
   }
 
