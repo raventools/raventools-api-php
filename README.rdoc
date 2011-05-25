@@ -40,16 +40,20 @@ This variable (as an associative array) defines the parameters for the requested
 
 There are also a series of 'helper' methods that assemble some of this stuff for you rather than having to create your own '$options' arrays for a request. Some also build in date formatting so that you do not have to remember to format your start and end dates as YYYY-MM-DD. The list of helper methods (and required variables) are:
 
-* $Raven->GetProfileInfo()
-* $Raven->GetDomains()
-* $Raven->GetEngines()
-* $Raven->GetDomainInfo( $domain )
-* $Raven->GetRank( $keyword, $domain, $start_date, $end_date, $engine='all' )
-* $Raven->GetRankAll( $domain, $start_date, $end_date )
-* $Raven->GetRankMaxWeek( $domain, $keyword )
-* $Raven->GetCompetitiors( $domain )
-* $Raven->GetKeywords( $domain )
+* $Raven->getProfileInfo()
+* $Raven->getDomains()
+* $Raven->addDomain( $domain, $engines )
+* $Raven->removeDomain( $domain )
+* $Raven->getEngines()
+* $Raven->getDomainInfo( $domain )
+* $Raven->getRank( $keyword, $domain, $start_date, $end_date, $engine='all' )
+* $Raven->getRankAll( $domain, $start_date, $end_date )
+* $Raven->getRankMaxWeek( $domain, $keyword )
+* $Raven->getCompetitiors( $domain )
+* $Raven->getKeywords( $domain )
+* $Raven->addKeyword( $keyword, $domain )
+* $Raven->removeKeyword ( $keyword, $domain )
 
 == Where do I get my API key?
 
-In the current version of the platform, you can find it under Dashboard > Profile Settings and scroll down to where the API section is listed. You will need to generate a new API key if you have not already done so.
+To use the Raven Tools API, you must first sign up for an account. After doing so, you can find the API section under Settings (the gear icon) > Profile Manager and select the desired profile. You will need to generate a new API key if you have not already done so.

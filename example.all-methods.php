@@ -8,15 +8,15 @@ if (!defined('RAVEN_API_KEY')) {
 }
 
 // Change these to match your report queries
-$keyword = 'web design nashville';
-$domain = 'www.centresource.com';
-$start_date = '2011-01-01';
-$end_date = '2011-01-31';
+$keyword = 'custom widgets';
+$domain = 'www.example.com';
+$start_date = '2011-05-01';
+$end_date = '2011-05-31';
 
 
 // Make sure the script has an API Key is valid.
 if (! RavenTools::validateAPIKey(RAVEN_API_KEY) ) {
-	die ("Thanks for testing out the library! You need to edit the <tt>./example.all-methods.php</tt> file to include your profile's API Key before this script will run. Just change <tt>YOUR_API_KEY_HERE</tt> to the correct value.");
+	die ("Thanks for testing out the library! You need to edit the <tt>./example.all-methods.php</tt> file to include your Raven Tools profile's API Key before this script will run. Just change <tt>YOUR_API_KEY_HERE</tt> to the correct value.");
 }
 
 $Raven = new RavenTools(RAVEN_API_KEY);

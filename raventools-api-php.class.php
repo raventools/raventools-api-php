@@ -1,7 +1,7 @@
 <?php
 
 /**
- * RavenTools API PHP Class
+ * Raven Tools API PHP Class
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package default
@@ -449,16 +449,16 @@ class RavenTools {
   private function curl($url, array $get = array(), array $options = array())
   {   
       $defaults = array(
-          CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get),
-          CURLOPT_HEADER => 0,
-          CURLOPT_RETURNTRANSFER => TRUE,
-          CURLOPT_TIMEOUT => 4
+        CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get),
+        CURLOPT_HEADER => 0,
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_TIMEOUT => 4
       );
 
       $ch = curl_init();
       curl_setopt_array($ch, ($options + $defaults));
       if( ! $result = curl_exec($ch)):
-          //trigger_error(curl_error($ch));
+        //trigger_error(curl_error($ch));
       endif;
       curl_close($ch);
 
