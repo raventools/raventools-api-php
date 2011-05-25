@@ -49,7 +49,7 @@ class RavenTools {
    *
    * @return object
    */
-  public function GetProfileInfo() {
+  public function getProfileInfo() {
     return $this->get('profile_info');
   }
   
@@ -58,16 +58,47 @@ class RavenTools {
    *
    * @return object
    */
-  public function GetDomains() {
+  public function getDomains() {
     return $this->get('domains');
   }   
+
+  /**
+   * Add Domain
+   *
+   * @param string $domain 
+   * @param string $engines 
+   */
+  public function addDomain( $domain, $engines = array() ) {
+    if (!isset($dmain) || empty($domain)):
+      return false;
+    endif;
+    
+    if (is_array($engines) && !empty($engines)):
+      $engines = implode(',', $engines);
+    endif;
+    
+    $this->get('add_domain', array('domain'=>$domain,'engines'=>$engines) );
+  }
+
+  /**
+   * Remove Domain
+   *
+   * @param string $domain
+   */
+  public function removeDomain ( $domain ) {
+    if (!isset($dmain) || empty($domain)):
+      return false;
+    endif;
+
+    $this->get('add_domain', array('domain'=>$domain) );
+  }
 
   /**
    * Get Engines
    *
    * @return object
    */
-  public function GetEngines() {
+  public function getEngines() {
     return $this->get('engines');
   }
 
@@ -77,12 +108,12 @@ class RavenTools {
    * @param string $domain 
    * @return object
    */
-  public function GetDomainInfo( $domain ) {
+  public function getDomainInfo( $domain ) {
     if (empty($domain)):
       return false;
     endif;
       
-    return $this->get('domain_info', array('domain'=>$domain));
+    return $this->get('domain_info', array('domain'=>$domain) );
   }
 
   /**
@@ -95,7 +126,7 @@ class RavenTools {
    * @param string $engine 
    * @return object
    */
-  public function GetRank( $keyword, $domain, $start_date, $end_date, $engine='all' ) {
+  public function getRank( $keyword, $domain, $start_date, $end_date, $engine='all' ) {
     if ( !isset($keyword, $domain, $start_date, $end_date) || empty($domain) || empty($keyword) ):
       return false;
     endif;
@@ -114,7 +145,7 @@ class RavenTools {
    * @param string $end_date 
    * @return object
    */
-  public function GetRankAll( $domain, $start_date, $end_date ) {
+  public function getRankAll( $domain, $start_date, $end_date ) {
     if ( !isset($domain, $start_date, $end_date) || empty($domain) ):
       return false;
     endif;
@@ -132,12 +163,12 @@ class RavenTools {
    * @param string $keyword 
    * @return object
    */
-  public function GetRankMaxWeek( $domain, $keyword ) {
+  public function getRankMaxWeek( $domain, $keyword ) {
     if ( !isset($domain, $keyword) || empty($domain) || empty($keyword) ):
       return false;
     endif;
     
-    return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword));   
+    return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword) );   
   }
   
   /**
@@ -146,26 +177,56 @@ class RavenTools {
    * @param string $domain 
    * @return object
    */
-  public function GetCompetitiors( $domain ) {
+  public function getCompetitiors( $domain ) {
     if ( !isset($domain) || empty($domain) ):
       return false;
     endif;
     
-    return $this->get('competitors', array('domain'=>$domain));
+    return $this->get('competitors', array('domain'=>$domain) );
   }
   
   /**
-   * Get Keyword
+   * Get Keywords
    *
    * @param string $domain 
    * @return object
    */
-  public function GetKeywords( $domain ) {
+  public function getKeywords( $domain ) {
     if ( !isset($domain) || empty($domain) ):
       return false;
     endif;
 
-    return $this->get('keywords', array('domain'=>$domain));
+    return $this->get('keywords', array('domain'=>$domain) );
+  }
+
+  /**
+   * Add Keyword
+   *
+   * @param string $keyword 
+   * @param string $domain 
+   * @return void
+   */
+  public function addKeyword( $keyword, $domain ) {
+    if ( !isset($domain, $keyword) || empty($domain) || empty($keyword) ):
+      return false;
+    endif;
+
+    return $this->get('add_keyword', array('domain'=>$domain,'keyword'=>$keyword) );
+  }
+
+  /**
+   * Remove Keyword
+   *
+   * @param string $keyword 
+   * @param string $domain 
+   * @return void
+   */
+  public function removeKeyword( $keyword, $domain ) {
+    if ( !isset($domain, $keyword) || empty($domain) || empty($keyword) ):
+      return false;
+    endif;
+
+    return $this->get('remove_keyword', array('domain'=>$domain,'keyword'=>$keyword) );  
   }
 
 
