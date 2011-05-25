@@ -168,6 +168,7 @@ class RavenTools {
     return $this->get('keywords', array('domain'=>$domain));
   }
 
+
   /* Core query methods */
 
   /**
@@ -229,7 +230,6 @@ class RavenTools {
 		return false;
 	endif;
   }
-
 
 
   /* Private methods */

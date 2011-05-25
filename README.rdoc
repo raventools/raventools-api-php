@@ -31,10 +31,24 @@ This variable defines which data set you want to be returned. See http://raven-s
 
 == $options
 
-This variable (as an associative array) defines the parameters for the requested data set. Some methods only require the method name (examples: domains, profile_info, domains) while others require additional parameters (examples: rank, rank_all, rank_max_week). To use this, you define the option in a parameter => value format. To see the list of required options, refer to http://raven-seo-tools.com/docs/.
+This variable (as an associative array) defines the parameters for the requested data set. Some methods only require the method name (examples: domains, profile_info, domains) while others require additional parameters (examples: rank, rank_all, rank_max_week). To use this, you define the option in a parameter => value format. To see the list of required options, refer to http://raven-seo-tools.com/docs/#.
 
   $rank = $Raven->get('rank', array('keyword'=>'web design nashville','domain'=>'www.centresource.com','start_date'=>'2011-01-01','end_date'=>'2011-01-31') );
   // $rank now contains a PHP object that can be iterated through to display results
+
+== Helper Methods
+
+There are also a series of 'helper' methods that assemble some of this stuff for you rather than having to create your own '$options' arrays for a request. Some also build in date formatting so that you do not have to remember to format your start and end dates as YYYY-MM-DD. The list of helper methods (and required variables) are:
+
+* $Raven->GetProfileInfo()
+* $Raven->GetDomains()
+* $Raven->GetEngines()
+* $Raven->GetDomainInfo( $domain )
+* $Raven->GetRank( $keyword, $domain, $start_date, $end_date, $engine='all' )
+* $Raven->GetRankAll( $domain, $start_date, $end_date )
+* $Raven->GetRankMaxWeek( $domain, $keyword )
+* $Raven->GetCompetitiors( $domain )
+* $Raven->GetKeywords( $domain )
 
 == Where do I get my API key?
 
