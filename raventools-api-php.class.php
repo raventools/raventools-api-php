@@ -9,7 +9,7 @@
 class RavenTools {
 
   const api_version = '1.0';
-  const end_point = 'http://raven-seo-tools.com/api';
+  const end_point = 'http://api.raventools.com/api';
 
   private $api_key;
 
