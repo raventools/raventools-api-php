@@ -6,7 +6,7 @@
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package default
  */
-class RavenTools {
+class RavenToolsAPI {
 
   const api_version = '1.0';
   const end_point = 'https://api.raventools.com/api';
@@ -24,15 +24,12 @@ class RavenTools {
   public $response;
   public $required_fields;
   public $optional_fields;
-  public $errors;
 
   function __construct($api_key = null) {
     $this->api_key = $api_key;
-      if (empty($api_key)) { die('You must provide an API key for the desired Raven Tools profile.'); }
     $this->format = 'json';
     $this->required_fields = array();
     $this->optional_fields = array();
-    $this->errors = array();
   }
 
 
@@ -362,7 +359,7 @@ class RavenTools {
       break;
 
       default:
-        $this->addError('raven_invalid_method', "'{$method}' was not recognized as a valid method.");
+        throw new RavenToolsAPIException("'{$method}' was not recognized as a valid method.", 400);
         break;
     
     endswitch;
@@ -378,12 +375,8 @@ class RavenTools {
    */
   private function get_response($options = array()) {
     $url = $this->build_request_url($options);
-    if ($this->hasErrors() == false):
-      $response = $this->curl($url);
-      return $this->parse_response($response);
-    else:
-      return false;
-    endif;
+    $response = $this->curl($url);
+    return $this->parse_response($response);
   }
   
   /**
@@ -396,7 +389,7 @@ class RavenTools {
   private function check_required() {
     foreach($this->required_fields as $field) {
       if (!isset($this->$field) || empty($this->$field)):
-        $this->addError('raven_missing_required_field', "The '{$field}' was not set as part of this request. Required by '{$this->method}' method.");
+        throw new RavenToolsAPIException("The '{$field}' was not set as part of this request. Required by '{$this->method}' method.", 400);
       endif;
     }
   }
@@ -437,15 +430,15 @@ class RavenTools {
     return $this->request;
   }
   
-/**
- * cURL
- *
- * @param string $url - URL to query
- * @param array $get - Associative array of $_GET query string parameters
- * @param array $options - Specific cURL options
- * @return string - Response from remote host
- * @link http://www.php.net/manual/en/function.curl-exec.php#98628
- */
+  /**
+   * cURL
+   *
+   * @param string $url - URL to query
+   * @param array $get - Associative array of $_GET query string parameters
+   * @param array $options - Specific cURL options
+   * @return string - Response from remote host
+   * @link http://www.php.net/manual/en/function.curl-exec.php#98628
+   */
   private function curl($url, array $get = array(), array $options = array())
   {   
       $defaults = array(
@@ -457,8 +450,12 @@ class RavenTools {
 
       $ch = curl_init();
       curl_setopt_array($ch, ($options + $defaults));
-      if( ! $result = curl_exec($ch)):
-        //trigger_error(curl_error($ch));
+      $result = curl_exec($ch);
+      $result_info = curl_getinfo($ch);
+      if ($result_info['http_code'] != 200 && $result_info['http_code'] != 201):
+        $msg = curl_error($ch) ? curl_error($ch) : 'Response: ' . $result;
+        curl_close($ch);
+        throw new RavenToolsAPIException($msg, $result_info['http_code']);
       endif;
       curl_close($ch);
 
@@ -476,37 +473,18 @@ class RavenTools {
   private function parse_response($response) {
     $this->response = $response;
     if (empty($this->response)):
-      $this->addError('raven_empty_response', "The request for '{$this->request}' returned an empty response.");
+			throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
     endif;
     return $this->response;
   }
 
-  /**
-   * Add Error
-   *
-   * Adds an error to the $errors array
-   *
-   * @param string $key - Unique identifier for error message
-   * @param string $msg - Text message for error
-   * @return void
-   */
-  private function addError($key, $msg) {
-    $this->errors[$key] = $msg;
-  }
+}
 
-  /**
-   * Has Errors
-   *
-   * Returns true or false based on whether the $errors array is empty
-   *
-   * @return boolean
-   */
-  private function hasErrors() {
-    if (empty($this->errors)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
+/**
+ * Raven Tools API Exception Handler
+ */
+class RavenToolsAPIException extends Exception {
+	public function __construct($message, $code = 0, Exception $previous = null) {
+		parent::__construct($message, $code, $previous);
+	}
 }

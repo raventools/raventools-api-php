@@ -3,7 +3,7 @@
 This PHP class provides an interface to the Raven Tools API. To get started, first instantiate the class. Here, we simply call it $Raven.
 
    require 'path/to/raventools-api-php/raventools-api-php.class.php';
-   $Raven = new RavenTools( 'YOUR_API_KEY' );
+   $Raven = new RavenToolsAPI( 'YOUR_API_KEY' );
 
 With the new $Raven instance, we now have three different options for pulling in the data we need.
 
@@ -11,7 +11,7 @@ With the new $Raven instance, we now have three different options for pulling in
 
   $responseObject = $Raven->get($method, $options);
 
-The 'get()' method calls the 'getJSON()' method, and then parses the JSON response into a PHP object. For ease of use, this is probably the one you will most likely need unless you are setting up another layer, such as an AJAX loader.
+The 'get()' method calls the 'getJSON()' method, and then parses the JSON response into a PHP object. For ease of use, this is probably the one you will most likely need unless you are setting up another layer, such as an AJAX loader. Remember to handle exceptions that may be thrown in this method.
 
 === getJSON()
 
@@ -35,6 +35,10 @@ This variable (as an associative array) defines the parameters for the requested
 
   $rank = $Raven->get('rank', array('keyword'=>'web design nashville','domain'=>'www.centresource.com','start_date'=>'2011-01-01','end_date'=>'2011-01-31') );
   // $rank now contains a PHP object that can be iterated through to display results
+
+== Exceptions
+
+It is recommended that you wrap your ->get() or helper methods listed below with exception handling for the 'RavenToolsAPIException' class to avoid uncaught exceptions in the event of invalid user input or provider latency. Exceptions can be thrown in '->setMethod()', '->curl()', '->check_required()' and '->parse_response()' as of this writing.
 
 == Helper Methods
 

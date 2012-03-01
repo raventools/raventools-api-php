@@ -15,11 +15,11 @@ $end_date = '2011-05-31';
 
 
 // Make sure the script has an API Key is valid.
-if (! RavenTools::validateAPIKey(RAVEN_API_KEY) ) {
+if (! RavenToolsAPI::validateAPIKey(RAVEN_API_KEY) ) {
 	die ("Thanks for testing out the library! You need to edit the <tt>./example.all-methods.php</tt> file to include your Raven Tools profile's API Key before this script will run. Just change <tt>YOUR_API_KEY_HERE</tt> to the correct value.");
 }
 
-$Raven = new RavenTools(RAVEN_API_KEY);
+$Raven = new RavenToolsAPI(RAVEN_API_KEY);
 
 ?>
 
