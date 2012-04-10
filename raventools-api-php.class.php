@@ -226,6 +226,19 @@ class RavenToolsAPI {
     return $this->get('remove_keyword', array('domain'=>$domain,'keyword'=>$keyword) );  
   }
 
+  /**
+   * Get Links
+   *
+   * @param string $domain 
+   * @return void
+   */
+  public function getLinks( $domain ) {
+    if ( !isset($domain) || empty($domain) ):
+      return false;
+    endif;
+
+    return $this->get('get_links', array('domain'=>$domain) );
+  }
 
   /* Core query methods */
 
@@ -356,6 +369,10 @@ class RavenToolsAPI {
 
       case 'remove_keyword':
         $this->required_fields = array('keyword', 'domain');
+      break;
+
+      case 'get_links':
+        $this->required_fields = array('domain');
       break;
 
       default:

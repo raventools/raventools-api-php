@@ -154,7 +154,7 @@ $domain_info = $Raven->get('domain_info');
 <p>Request: <tt> <?php echo $Raven->request; ?></tt></p>
 <p>Response:</p>
 <pre>
-<?php var_dump($rank); ?>
+<?php var_dump($domain_info); ?>
 </pre>
 
 <p><a href="#top">Back to Top</a></p>
@@ -168,7 +168,7 @@ $competitors = $Raven->get('competitors', array('domain'=>$domain));
 <p>Request: <tt> <?php echo $Raven->request; ?></tt></p>
 <p>Response:</p>
 <pre>
-	<?php var_dump($rank); ?>
+	<?php var_dump($competitors); ?>
 </pre>
 
 <p><a href="#top">Back to Top</a></p>
@@ -182,7 +182,17 @@ $keywords = $Raven->get('keywords', array('domain'=>$domain));
 <p>Request: <tt> <?php echo $Raven->request; ?></tt></p>
 <p>Response:</p>
 <pre>
-<?php var_dump($rank); ?>
+<?php var_dump($keywords); ?>
+</pre>
+
+<?php
+$links = $Raven->get('get_links', array('domain'=>$domain));
+?>
+<h3 id="keywords">Keywords (method:keywords)</h3>';
+<p>Request: <tt> <?php echo $Raven->request; ?></tt></p>
+<p>Response:</p>
+<pre>
+<?php var_dump($links); ?>
 </pre>
 
 <p><a href="#top">Back to Top</a></p>
