@@ -295,11 +295,11 @@ class RavenToolsAPI {
   static function validateAPIKey($key) {
     $testing = new self($key);
     $result = $testing->get('domains');
-	if (is_array($result)):
-		return true;
-	else:
-		return false;
-	endif;
+  if (is_array($result)):
+    return true;
+  else:
+    return false;
+  endif;
   }
 
 
@@ -373,6 +373,7 @@ class RavenToolsAPI {
 
       case 'get_links':
         $this->required_fields = array('domain');
+        $this->optional_fields = array('tag');
       break;
 
       default:
@@ -426,17 +427,29 @@ class RavenToolsAPI {
       $this->$key = $value;
     endforeach;
 
-    // Verify that every required attribute was specified, send to $errors array if not
+    // Verify that every required attribute was specified, throw exception if not
     $this->check_required();
 
     // Begin building the URL for the request
     $url = self::end_point . '?key=' . $this->api_key . '&method=' . $this->method;
     foreach ($this->required_fields as $field):
-      $url = $url . '&' . $field . '=' . urlencode($this->$field);
+      if (is_array($this->$field)):
+        foreach ($this->$field as $k => $v):
+          $url = $url . '&' . $field . '[]=' . urlencode($v);
+        endforeach;
+      else:
+        $url = $url . '&' . $field . '=' . urlencode($this->$field);
+      endif;
     endforeach;
     foreach ($this->optional_fields as $field):
       if (!empty($this->$field)):
-        $url = $url . '&' . $field . '=' . urlencode($this->$field);
+        if (is_array($this->$field)):
+          foreach ($this->$field as $k => $v):
+            $url = $url . '&' . $field . '[]=' . urlencode($v);
+          endforeach;
+        else:
+          $url = $url . '&' . $field . '=' . urlencode($this->$field);
+        endif;
       endif;
     endforeach;
     $url = $url . '&format=' . $this->format;
@@ -462,7 +475,7 @@ class RavenToolsAPI {
         CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get),
         CURLOPT_HEADER => 0,
         CURLOPT_RETURNTRANSFER => TRUE,
-        CURLOPT_TIMEOUT => 4
+        CURLOPT_TIMEOUT => 30
       );
 
       $ch = curl_init();
@@ -490,7 +503,7 @@ class RavenToolsAPI {
   private function parse_response($response) {
     $this->response = $response;
     if (empty($this->response)):
-			throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
+      throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
     endif;
     return $this->response;
   }
@@ -501,7 +514,7 @@ class RavenToolsAPI {
  * Raven Tools API Exception Handler
  */
 class RavenToolsAPIException extends Exception {
-	public function __construct($message, $code = 0, Exception $previous = null) {
-		parent::__construct($message, $code, $previous);
-	}
+  public function __construct($message, $code = 0, Exception $previous = null) {
+    parent::__construct($message, $code, $previous);
+  }
 }

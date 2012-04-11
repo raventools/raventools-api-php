@@ -27,11 +27,11 @@ The 'getXML()' method just retrieves the XML formatted response as a string. If 
 
 == $method
 
-This variable defines which data set you want to be returned. See http://raven-seo-tools.com/docs/ for a list of methods.
+This variable defines which data set you want to be returned. See https://api.raventools.com/docs/ for a list of methods.
 
 == $options
 
-This variable (as an associative array) defines the parameters for the requested data set. Some methods only require the method name (examples: domains, profile_info, domains) while others require additional parameters (examples: rank, rank_all, rank_max_week). To use this, you define the option in a parameter => value format. To see the list of required options, refer to http://raven-seo-tools.com/docs/#.
+This variable (as an associative array) defines the parameters for the requested data set. Some methods only require the method name (examples: domains, profile_info, domains) while others require additional parameters (examples: rank, rank_all, rank_max_week). To use this, you define the option in a parameter => value format. To see the list of required options, refer to https://api.raventools.com/docs/.
 
   $rank = $Raven->get('rank', array('keyword'=>'web design nashville','domain'=>'www.centresource.com','start_date'=>'2011-01-01','end_date'=>'2011-01-31') );
   // $rank now contains a PHP object that can be iterated through to display results
@@ -57,6 +57,7 @@ There are also a series of 'helper' methods that assemble some of this stuff for
 * $Raven->getKeywords( $domain )
 * $Raven->addKeyword( $keyword, $domain )
 * $Raven->removeKeyword ( $keyword, $domain )
+* $Raven->getLinks ( $domain )
 
 == Where do I get my API key?
 
