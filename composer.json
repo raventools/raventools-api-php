@@ -1,0 +1,8 @@
+{
+	"name": "stephenyeargin/raventools-api-php",
+	"require": {
+	},
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*"
+	}
+}

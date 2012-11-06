@@ -5,6 +5,7 @@
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package default
+ * @version 1.1
  */
 class RavenToolsAPI {
 
@@ -31,7 +32,6 @@ class RavenToolsAPI {
     $this->required_fields = array();
     $this->optional_fields = array();
   }
-
 
   public function __set($name, $value) {
     $this->$name = $value;

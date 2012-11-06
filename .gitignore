@@ -1,2 +1,5 @@
 .DS_Store
 localtest.php
+test/phpunit.xml
+vendor
+composer.lock
