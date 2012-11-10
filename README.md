@@ -2,7 +2,7 @@
 
 This PHP class provides an interface to the Raven Tools API. To get started, first instantiate the class. Here, we simply call it $Raven.
 
-    require 'path/to/raventools-api-php/raventools-api-php.class.php';
+    require 'path/to/raventools-api-php/src/class.raven-api-php.php';
     $Raven = new RavenToolsAPI( 'YOUR_API_KEY' );
 
 With the new `$Raven` instance, we now have three different options for pulling in the data we need.
