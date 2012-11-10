@@ -41,7 +41,7 @@ require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
 $Raven = new RavenToolsAPI('YOUR_API_KEY');</pre>
 		</article>
 		<article>
-			<h2 id="rank">Rank (method:rank)</h2>
+			<h2 id="rank">Rank (method: rank)</h2>
 			<p>This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -56,7 +56,7 @@ $rank = $Raven->get('rank', array(
 	));</pre>
 		</article>
 		<article>
-			<h2 id="rank_all">Rank All (method:rank_all)</h2>
+			<h2 id="rank_all">Rank All (method: rank_all)</h2>
 			<p>This request will return a list of matches for a particular domain and date. You can only access results for domains and keywords that have been added to your account, including competitor domains.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -69,7 +69,7 @@ $rank_all = $Raven->get('rank_all', array(
 	));</pre>
 		</article>
 		<article>
-			<h2 id="domains">Domains (method:domains)</h2>
+			<h2 id="domains">Domains (method: domains)</h2>
 			<p>This request will return the available domains for the profile associated with your API key.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -78,7 +78,7 @@ $domains = $Raven->geDomains();
 $domains = $Raven->get('domains');</pre>
 		</article>
 		<article>
-			<h2 id="rank_max_week">Rank Max Week (method:rank_max_week)</h2>
+			<h2 id="rank_max_week">Rank Max Week (method: rank_max_week)</h2>
 			<p>This request returns the ISO Week number (YYYYWW) and date (YYYY-MM-DD) for the latest week with complete results for all keywords in a domain or a domain/keyword pair. It returns null for date/week and status = 'no data' for domains or domain/keywords that have no available data.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -90,7 +90,7 @@ $rank_max_week = $Raven->get('rank_max_week', array(
 	));</pre>
 		</article>
 		<article>
-			<h2 id="engines">Engines (method:engines)</h2>
+			<h2 id="engines">Engines (method: engines)</h2>
 			<p>This request will return the available search engines for tracking keywords, to be used when adding or modifying domains.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -99,7 +99,7 @@ $engines = $Raven->getEngines();
 $engines = $Raven->get('engines');</pre>
 		</article>
 		<article>
-			<h2 id="profile_info">Profile Info (method:profile_info)</h2>
+			<h2 id="profile_info">Profile Info (method: profile_info)</h2>
 			<p>This request will return the name and billable keyword usage for the current profile.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -108,7 +108,7 @@ $profile_info = $Raven->getProfileInfo();
 $profile_info = $Raven->get('profile_info');</pre>
 		</article>
 		<article>
-			<h2 id="domain_info">Domain Info (method:domain_info)</h2>
+			<h2 id="domain_info">Domain Info (method: domain_info)</h2>
 			<p>This request will return the search engines for the domain provided.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -117,7 +117,7 @@ $domain_info = $Raven->getDomainInfo();
 $domain_info = $Raven->get('domain_info');</pre>
 		</article>
 		<article>
-			<h2 id="competitors">Competitors (method:competitors)</h2>
+			<h2 id="competitors">Competitors (method: competitors)</h2>
 			<pre class="prettyprint">
 // Helper Method
 $competitors = $Raven->getCompetitiors( $domain )
@@ -125,7 +125,7 @@ $competitors = $Raven->getCompetitiors( $domain )
 $competitors = $Raven->get('competitors', array('domain'=>$domain));</pre>
 		</article>
 		<article>
-			<h2 id="keywords">Keywords (method:keywords)</h2>
+			<h2 id="keywords">Keywords (method: keywords)</h2>
 			<p>This request will return the available keywords for the domain provided.</p>
 			<pre class="prettyprint">
 // Helper Method
@@ -134,7 +134,7 @@ $keywords = $Raven->getKeywords( $domain );
 $keywords = $Raven->get( 'keywords', array('domain'=>$domain) );</pre>
 		</article>
 		<article />
-			<h2 id="keywords">Keywords (method:get_links)</h2>
+			<h2 id="keywords">Keywords (method: get_links)</h2>
 			<p>This request will return the all links for the domain provided.</p>
 			<pre class="prettyprint">
 // Helper Method
