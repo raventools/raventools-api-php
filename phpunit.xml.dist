@@ -5,6 +5,7 @@
 		 bootstrap="tests/bootstrap.php"
 		 syntaxCheck="true"
 		 colors="true">
+
 	<testsuites>
 		<testsuite name="RavenToolsAPI_Tests">
 			<directory suffix="Test.php">tests/RavenToolsAPI</directory>
