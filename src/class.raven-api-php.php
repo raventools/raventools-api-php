@@ -26,11 +26,20 @@ class RavenToolsAPI {
   public $required_fields;
   public $optional_fields;
 
-  function __construct($api_key = null) {
+  private $transport;
+
+  function __construct($api_key = null, $transport = null) {
     $this->api_key = $api_key;
     $this->format = 'json';
     $this->required_fields = array();
     $this->optional_fields = array();
+
+    if (is_null($transport) || !$transport) {
+      $this->transport = new RavenToolsAPITransport();
+    } else {
+      $this->transport = $transport;
+    }
+
   }
 
   public function __set($name, $value) {
@@ -75,7 +84,7 @@ class RavenToolsAPI {
       $engines = implode(',', $engines);
     endif;
     
-    $this->get('add_domain', array('domain'=>$domain,'engine_id'=>$engines) );
+    return $this->get('add_domain', array('domain'=>$domain,'engine_id'=>$engines) );
   }
 
   /**
@@ -88,7 +97,7 @@ class RavenToolsAPI {
       throw new RavenToolsAPIException("The domain was not set as part of this request. Required by removeDomain().");
     endif;
 
-    $this->get('remove_domain', array('domain'=>$domain) );
+    return $this->get('remove_domain', array('domain'=>$domain) );
   }
 
   /**
@@ -282,6 +291,7 @@ class RavenToolsAPI {
     $this->setMethod($method);
     if ($this->format == 'json') {
       $response = $this->getJSON($method, $options);
+file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
       return json_decode($response);
     } else {
       $response = $this->getXML($method, $options);
@@ -309,7 +319,7 @@ class RavenToolsAPI {
       return true;
     else:
       return false;
-  endif;
+    endif;
   }
 
 
@@ -403,7 +413,7 @@ class RavenToolsAPI {
    */
   private function get_response($options = array()) {
     $url = $this->build_request_url($options);
-    $response = $this->curl($url);
+    $response = $this->transport->curl($url);
     return $this->parse_response($response);
   }
   
@@ -469,7 +479,29 @@ class RavenToolsAPI {
     // Return the request URL
     return $this->request;
   }
-  
+
+  /**
+   * Parse Response
+   *
+   * Adds an error condition if the response is empty.
+   *
+   * @param string $response - Response in string format.
+   * @return string - Response in string format.
+   */
+  private function parse_response($response) {
+    $this->response = $response;
+    if (empty($this->response)):
+      throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
+    endif;
+    return $this->response;
+  }
+
+}
+
+/**
+ * Raven Tools API Transport
+ */
+class RavenToolsAPITransport {
   /**
    * cURL
    *
@@ -479,7 +511,7 @@ class RavenToolsAPI {
    * @return string - Response from remote host
    * @link http://www.php.net/manual/en/function.curl-exec.php#98628
    */
-  private function curl($url, array $get = array(), array $options = array())
+  public function curl($url, array $get = array(), array $options = array())
   {   
       $defaults = array(
         CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get),
@@ -501,23 +533,6 @@ class RavenToolsAPI {
 
       return $result;
   }
-
-  /**
-   * Parse Response
-   *
-   * Adds an error condition if the response is empty.
-   *
-   * @param string $response - Response in string format.
-   * @return string - Response in string format.
-   */
-  private function parse_response($response) {
-    $this->response = $response;
-    if (empty($this->response)):
-      throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
-    endif;
-    return $this->response;
-  }
-
 }
 
 /**

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Raven>
+	<domains>
+		<domain>sample.net</domain>
+		<domain>tweetstalk.com</domain>
+	</domains>
+</Raven>

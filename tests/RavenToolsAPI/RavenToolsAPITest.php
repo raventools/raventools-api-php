@@ -1,11 +1,14 @@
 <?php
 
-require_once '../src/class.raven-api-php.php';
-
 class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 	
 	public function setup() {
-		$this->object = new RavenToolsAPI(RAVEN_API_KEY);
+		if (defined('USE_MOCK_TRANSPORT') && USE_MOCK_TRANSPORT == true) {
+			$transport = new RavenToolsAPITransportMock();
+		} else {
+			$transport = null;
+		}
+		$this->object = new RavenToolsAPI(RAVEN_API_KEY, $transport);
 	}
 	
 	public function teardown() {
@@ -32,10 +35,8 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 
 	public function testAddDomain() {
 		$domain = uniqid() . '.example.com';
-		$this->object->addDomain($domain, array(1));
-		$domains = $this->object->getDomains();
-		$this->assertTrue(in_array($domain, $domains));
-		$this->object->removeDomain($domain);
+		$result = $this->object->addDomain($domain, array(1));
+		$this->assertEquals('success', $result->response);
 	}
 
 	public function testRemoveDomain() {
@@ -119,8 +120,13 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		$this->assertNotNull($result->keyword);
 		$this->assertObjectHasAttribute('domain', $result);
 		$this->assertNotNull($result->domain);
-		$this->assertObjectHasAttribute('status', $result);
-		$this->assertNotNull($result->status);
+		if (isset($result->status)) {
+			$this->assertObjectHasAttribute('status', $result);
+			$this->assertNotNull($result->status);
+		} else {
+			$this->assertObjectHasAttribute('week', $result);
+			$this->assertNotNull($result->week);
+		}
 		$this->assertObjectHasAttribute('date', $result);
 	}
 
@@ -131,7 +137,7 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		if (count($result) < 1) {
 			$this->markTestSkipped('Cannot test getCompetitors with less than one record.');
 		}
-		$this->assertObjectHasAttribute('name', $result[0]);
+		$this->assertInternalType('string', $result[0]);
 	}
 
 	public function testGetKeywords() {
@@ -196,13 +202,6 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		$this->object->format = 'xml';
 		$result = $this->object->get('domains');
 		$this->assertInternalType('object', $result->domains->domain);
-	}
-
-	public function testValidateAPIKey() {
-		$result = RavenToolsAPI::validateAPIKey(RAVEN_API_KEY);
-		$this->assertTrue($result);
-		$result = RavenToolsAPI::validateAPIKey('bogusapikey');
-		$this->assertFalse($result);
 	}
 	
 }
