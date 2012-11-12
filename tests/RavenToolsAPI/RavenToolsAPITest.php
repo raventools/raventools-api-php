@@ -11,10 +11,8 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 	public function teardown() {
 	}
 	
-	/**
-	 * @expectedException RavenToolsAPIException
-	 */
 	public function testConnectionFailure() {
+		$this->setExpectedException('RavenToolsAPIException');
 		$this->object = new RavenToolsAPI('bogusstring');
 		$result = $this->object->getProfileInfo();
 	}
