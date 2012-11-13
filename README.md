@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/stephenyeargin/raventools-api-php.png)](https://api.travis-ci.org/stephenyeargin/raventools-api-php)
+[![Build Status](https://api.travis-ci.org/stephenyeargin/raventools-api-php.png)](https://travis-ci.org/stephenyeargin/raventools-api-php)
 
 ## Basic Usage
 
