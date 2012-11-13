@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/stephenyeargin/raventools-api-php.png)](https://api.travis-ci.org/stephenyeargin/raventools-api-php)
+
 ## Basic Usage
 
 This PHP class provides an interface to the Raven Tools API. To get started, first instantiate the class. Here, we simply call it $Raven.
@@ -61,4 +63,4 @@ There are also a series of 'helper' methods that assemble some of the request ra
 
 ## Where do I get my API key?
 
-To use the Raven Tools API, you must first sign up for an account. After doing so, you can find the API section under Settings (the gear icon) > Profile Manager and select the desired profile. You will need to generate a new API key if you have not already done so.
+To use the Raven Tools API, you must first sign up for an account (Free 30 Day Trial). After doing so, you can find the API section under Settings (the gear icon) > Profile Manager and select the desired profile. You will need to generate a new API key if you have not already done so.
