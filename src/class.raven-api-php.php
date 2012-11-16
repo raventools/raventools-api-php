@@ -206,13 +206,13 @@ class RavenToolsAPI {
     return $this->get('keywords', array('domain'=>$domain) );
   }
 
-	public function getKeywordsTags( $domain = '' ) {
-		if ( empty($domain) ):
+  public function getKeywordsTags( $domain = '' ) {
+    if ( empty($domain) ):
       throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getKeywordsTags().");
     endif;
 
-		return $this->get('keywords_tags', array('domain'=>$domain) );
-	}
+    return $this->get('keywords_tags', array('domain'=>$domain) );
+  }
 
   /**
    * Add Keyword
