@@ -45,11 +45,11 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');</pre>
 			<p>This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.</p>
 			<pre class="prettyprint">
 // Helper Method
-$rank = $Raven->getRank( $keyword, $domain, $start_date, $end_date, $engine );
+$rank = $Raven->getRank( $domain, $keyword, $start_date, $end_date, $engine );
 // Direct Call
 $rank = $Raven->get('rank', array(
-	'keyword'=>$keyword,
 	'domain'=>$domain,
+	'keyword'=>$keyword,
 	'start_date'=>$start_date,
 	'end_date'=>$end_date,
 	'engine'=>'all'
@@ -120,7 +120,7 @@ $domain_info = $Raven->get('domain_info');</pre>
 			<h2 id="competitors">Competitors (method: competitors)</h2>
 			<pre class="prettyprint">
 // Helper Method
-$competitors = $Raven->getCompetitiors( $domain )
+$competitors = $Raven->getCompetitors( $domain )
 // Direct Call
 $competitors = $Raven->get('competitors', array('domain'=>$domain));</pre>
 		</article>
