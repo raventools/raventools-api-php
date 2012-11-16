@@ -149,6 +149,17 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		}
 		$this->assertNotNull($result[0]);
 	}
+	
+	public function testGetKeywordsTags() {
+		$domains = $this->object->getDomains();
+		$result = $this->object->getKeywordsTags($domains[0]);
+		$this->assertInternalType('array', $result);
+		if (count($result) < 1) {
+			$this->markTestSkipped('Cannot test getKeywords with less than one record.');
+		}
+		$this->assertNotNull($result[0]->keyword);
+		$this->assertNotNull($result[0]->tags);
+	}
 
 	public function testAddKeyword() {
 		$domains = $this->object->getDomains();
