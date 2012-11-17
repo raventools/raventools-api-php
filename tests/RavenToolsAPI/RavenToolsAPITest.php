@@ -1,7 +1,7 @@
 <?php
 
 class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
-	
+
 	public function setup() {
 		if (defined('USE_MOCK_TRANSPORT') && USE_MOCK_TRANSPORT == true) {
 			$transport = new RavenToolsAPITransportMock();
@@ -10,16 +10,16 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		}
 		$this->object = new RavenToolsAPI(RAVEN_API_KEY, $transport);
 	}
-	
+
 	public function teardown() {
 	}
-	
+
 	public function testConnectionFailure() {
 		$this->setExpectedException('RavenToolsAPIException');
 		$this->object = new RavenToolsAPI('bogusstring');
 		$result = $this->object->getProfileInfo();
 	}
-	
+
 	public function testGetProfileInfo() {
 		$result = $this->object->getProfileInfo();
 		$this->assertInternalType('object', $result);
@@ -149,7 +149,7 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		}
 		$this->assertNotNull($result[0]);
 	}
-	
+
 	public function testGetKeywordsTags() {
 		$domains = $this->object->getDomains();
 		$result = $this->object->getKeywordsTags($domains[0]);
@@ -214,5 +214,5 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		$result = $this->object->get('domains');
 		$this->assertInternalType('object', $result->domains->domain);
 	}
-	
+
 }
