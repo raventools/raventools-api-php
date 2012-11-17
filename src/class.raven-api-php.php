@@ -218,7 +218,7 @@ class RavenToolsAPI {
    *
    * @param string $keyword
    * @param string $domain
-   * @return void
+   * @return object
    */
   public function addKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ):
@@ -233,7 +233,7 @@ class RavenToolsAPI {
    *
    * @param string $keyword
    * @param string $domain
-   * @return void
+   * @return object
    */
   public function removeKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ):
@@ -247,7 +247,7 @@ class RavenToolsAPI {
    * Get Links
    *
    * @param string $domain
-   * @return void
+   * @return object
    */
   public function getLinks( $domain = '' ) {
     if ( empty($domain) ):
@@ -255,6 +255,24 @@ class RavenToolsAPI {
     endif;
 
     return $this->get('get_links', array('domain'=>$domain) );
+  }
+
+  /**
+   * Get Website Types
+   *
+   * @return object
+   */
+  public function getWebsiteTypes() {
+    return $this->get('get_website_types');
+  }
+
+  /**
+   * Get Link Types
+   *
+   * @return object
+   */
+  public function getLinkTypes() {
+    return $this->get('get_link_types');
   }
 
   /* Core query methods */
@@ -409,6 +427,14 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
         $this->optional_fields = array('tag');
       break;
 
+      case 'get_website_types':
+        $this->required_fields = array();
+      break;
+
+      case 'get_link_types':
+        $this->required_fields = array();
+      break;
+
       default:
         throw new RavenToolsAPIException("'{$method}' was not recognized as a valid method.", 400);
         break;
@@ -436,7 +462,7 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    *
    * Iterates through the 'required_fields' property array to ensure that all necessary properties are set prior to a request being made.
    *
-   * @return void
+   * @return object
    */
   private function check_required() {
     foreach ($this->required_fields as $field) {

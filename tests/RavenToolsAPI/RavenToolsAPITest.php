@@ -189,6 +189,20 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		}
 		$this->assertObjectHasAttribute('link_text', $result[0]);
 	}
+	
+	public function testGetWebsiteTypes() {
+		$result = $this->object->getWebsiteTypes();
+		$this->assertInternalType('object', $result);
+		$this->assertInternalType('array', $result->results);
+		$this->assertGreaterThan(1, count($result->results));
+	}
+	
+	public function testGetLinkTypes() {
+		$result = $this->object->getLinkTypes();
+		$this->assertInternalType('object', $result);
+		$this->assertInternalType('array', $result->results);
+		$this->assertGreaterThan(1, count($result->results));
+	}
 
 	public function testGetJSON() {
 		$result = $this->object->getJSON('domains');
