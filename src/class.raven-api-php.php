@@ -415,11 +415,11 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
       break;
 
       case 'add_keyword':
-        $this->required_fields = array('keyword', 'domain');
+        $this->required_fields = array('domain', 'keyword');
       break;
 
       case 'remove_keyword':
-        $this->required_fields = array('keyword', 'domain');
+        $this->required_fields = array('domain', 'keyword');
       break;
 
       case 'get_links':
@@ -433,6 +433,14 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
 
       case 'get_link_types':
         $this->required_fields = array();
+      break;
+
+      case 'add_links':
+        $this->required_fields = array('domain', 'link');
+      break;
+
+      case 'update_links':
+        $this->required_fields = array('domain', 'link');
       break;
 
       default:
