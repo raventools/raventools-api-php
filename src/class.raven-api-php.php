@@ -76,7 +76,7 @@ class RavenToolsAPI {
    */
   public function addDomain( $domain = '', $engines = array() ) {
     if (!isset($domain) || empty($domain)):
-      throw new RavenToolsAPIException("The domain or engine was not set as part of this request. Required by addDomain().");
+      throw new RavenToolsAPIException('The domain or engine was not set as part of this request. Required by addDomain().', 500);
     endif;
 
     if (is_array($engines) && !empty($engines)):
@@ -93,7 +93,7 @@ class RavenToolsAPI {
    */
   public function removeDomain ( $domain = '' ) {
     if (!isset($domain) || empty($domain)):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by removeDomain().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by removeDomain().', 500);
     endif;
 
     return $this->get('remove_domain', array('domain'=>$domain) );
@@ -116,7 +116,7 @@ class RavenToolsAPI {
    */
   public function getDomainInfo( $domain = '' ) {
     if ( empty($domain) ):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getDomainInfo().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getDomainInfo().', 500);
     endif;
 
     return $this->get('domain_info', array('domain'=>$domain) );
@@ -134,7 +134,7 @@ class RavenToolsAPI {
    */
   public function getRank( $domain = '', $keyword = '', $start_date = '', $end_date = '', $engine = 'all' ) {
     if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ):
-      throw new RavenToolsAPIException("The domain, keyword, start date, end date or engine was not set as part of this request. Required by getRank().");
+      throw new RavenToolsAPIException('The domain, keyword, start date, end date or engine was not set as part of this request. Required by getRank().', 500);
     endif;
 
     $start_date = date('Y-m-d', strtotime($start_date));
@@ -153,7 +153,7 @@ class RavenToolsAPI {
    */
   public function getRankAll( $domain = '', $start_date = '', $end_date = '' ) {
     if ( empty($domain) || empty($start_date) || empty($end_date) ):
-      throw new RavenToolsAPIException("The domain, start date or end date was not set as part of this request. Required by getRankAll().");
+      throw new RavenToolsAPIException('The domain, start date or end date was not set as part of this request. Required by getRankAll().', 500);
     endif;
 
     $start_date = date('Y-m-d', strtotime($start_date));
@@ -171,7 +171,7 @@ class RavenToolsAPI {
    */
   public function getRankMaxWeek( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ):
-      throw new RavenToolsAPIException("The domain or keyword was not set as part of this request. Required by getRankMaxWeek().");
+      throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by getRankMaxWeek().', 500);
     endif;
 
     return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword) );
@@ -185,7 +185,7 @@ class RavenToolsAPI {
    */
   public function getCompetitors( $domain = '' ) {
     if ( empty($domain) ):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getCompetitors().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getCompetitors().', 500);
     endif;
 
     return $this->get('competitors', array('domain'=>$domain) );
@@ -199,7 +199,7 @@ class RavenToolsAPI {
    */
   public function getKeywords( $domain = '' ) {
     if ( empty($domain) ):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getKeywords().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getKeywords().', 500);
     endif;
 
     return $this->get('keywords', array('domain'=>$domain) );
@@ -207,7 +207,7 @@ class RavenToolsAPI {
 
   public function getKeywordsTags( $domain = '' ) {
     if ( empty($domain) ):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getKeywordsTags().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getKeywordsTags().', 500);
     endif;
 
     return $this->get('keywords_tags', array('domain'=>$domain) );
@@ -222,7 +222,7 @@ class RavenToolsAPI {
    */
   public function addKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ):
-      throw new RavenToolsAPIException("The domain or keyword was not set as part of this request. Required by addKeyword().");
+      throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by addKeyword().', 500);
     endif;
 
     return $this->get('add_keyword', array('domain'=>$domain,'keyword'=>$keyword) );
@@ -237,7 +237,7 @@ class RavenToolsAPI {
    */
   public function removeKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ):
-      throw new RavenToolsAPIException("The domain or keyword was not set as part of this request. Required by removeKeyword().");
+      throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by removeKeyword().', 500);
     endif;
 
     return $this->get('remove_keyword', array('domain'=>$domain,'keyword'=>$keyword) );
@@ -251,7 +251,7 @@ class RavenToolsAPI {
    */
   public function getLinks( $domain = '' ) {
     if ( empty($domain) ):
-      throw new RavenToolsAPIException("The domain was not set as part of this request. Required by getLinks().");
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getLinks().', 500);
     endif;
 
     return $this->get('get_links', array('domain'=>$domain) );
@@ -444,7 +444,7 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
       break;
 
       default:
-        throw new RavenToolsAPIException("'{$method}' was not recognized as a valid method.", 400);
+        throw new RavenToolsAPIException("'{$method}' was not recognized as a valid method.", 500);
         break;
 
     endswitch;
@@ -475,7 +475,7 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
   private function check_required() {
     foreach ($this->required_fields as $field) {
       if (!isset($this->$field) || empty($this->$field)):
-        throw new RavenToolsAPIException("The '{$field}' was not set as part of this request. Required by '{$this->method}' method.", 400);
+        throw new RavenToolsAPIException("The '{$field}' was not set as part of this request. Required by '{$this->method}' method.", 500);
       endif;
     }
   }
