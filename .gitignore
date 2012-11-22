@@ -1,5 +1,4 @@
 .DS_Store
-localtest.php
-tests/phpunit.xml
+phpunit.xml
 vendor
 composer.lock

@@ -37,6 +37,7 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		$domain = uniqid() . '.example.com';
 		$result = $this->object->addDomain($domain, array(1));
 		$this->assertEquals('success', $result->response);
+		$this->object->removeDomain($domain);
 	}
 
 	public function testRemoveDomain() {
@@ -157,8 +158,8 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		if (count($result) < 1) {
 			$this->markTestSkipped('Cannot test getKeywords with less than one record.');
 		}
-		$this->assertNotNull($result[0]->keyword);
-		$this->assertNotNull($result[0]->tags);
+		$this->assertObjectHasAttribute('keyword', $result[0]);
+		$this->assertObjectHasAttribute('tags', $result[0]);
 	}
 
 	public function testAddKeyword() {
