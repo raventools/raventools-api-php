@@ -58,8 +58,13 @@ There are also a series of 'helper' methods that assemble some of the request ra
 * `$Raven->getCompetitiors( $domain )`
 * `$Raven->getKeywords( $domain )`
 * `$Raven->addKeyword( $domain, $keyword )`
-* `$Raven->removeKeyword ( $domain, $keyword )`
-* `$Raven->getLinks ( $domain )`
+* `$Raven->removeKeyword( $domain, $keyword )`
+* `$Raven->getLinks( $domain )`
+* `$Raven->addLinks( $domain, $links )`
+* `$Raven->updateLinks( $domain, $links )`
+* `$Raven->deleteLinks( $domain, $links )`
+* `$Raven->getWebsiteTypes()`
+* `$Raven->getLinkTypes()`
 
 ## Where do I get my API key?
 

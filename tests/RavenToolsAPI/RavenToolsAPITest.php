@@ -190,14 +190,47 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		}
 		$this->assertObjectHasAttribute('link_text', $result[0]);
 	}
-	
+
+	public function testAddLinks() {
+		if (!defined('USE_MOCK_TRANSPORT') || USE_MOCK_TRANSPORT != true) {
+			$this->markTestSkipped('Link add/update/delete tests not implemented for live connection.');
+		}
+		$domains = $this->object->getDomains();
+		$links = '[{"domain":"raventools.com","status":"active","link text":"Raven Blog","link url":"http://www.raventools.com/blog","link description":"Raven Tools Blog"}]';
+		$result = $this->object->addLinks($domains[0], $links);
+		$this->assertEquals(3, count($result));
+		$this->assertTrue(in_array('5760823', $result));
+	}
+
+	public function testUpdateLinks() {
+		if (!defined('USE_MOCK_TRANSPORT') || USE_MOCK_TRANSPORT != true) {
+			$this->markTestSkipped('Link add/update/delete tests not implemented for live connection.');
+		}
+		$domains = $this->object->getDomains();
+		$links = '[{"link id":"130","status":"active","link text":"Raven Blog","link url":"www.raventools.com/blog","link type":"Paid (Permanent)","link description":"Raven Tools Blog","website type":"Social Media","website url":"www.about.com","tags":"raven,blog","creation date":"2012-07-14","paymentmethod":"paypal","cost":"12.45"}]';
+		$result = $this->object->updateLinks($domains[0], $links);
+		$this->assertEquals(3, count(get_object_vars($result)));
+		$this->assertTrue( (boolean) $result->{'5760823'});
+	}
+
+	public function testDeleteLinks() {
+		if (!defined('USE_MOCK_TRANSPORT') || USE_MOCK_TRANSPORT != true) {
+			$this->markTestSkipped('Link add/update/delete tests not implemented for live connection.');
+		}
+		$domains = $this->object->getDomains();
+		$links = array( array('link_id' => 1), array('link_id' => 130),  array('link_id' => 131), array('link_id' => 132) );
+		$result = $this->object->deleteLinks($domains[0], $links);
+		$this->assertEquals(3, count(get_object_vars($result)));
+		$this->assertTrue( (boolean) $result->{'130'});
+	}
+
 	public function testGetWebsiteTypes() {
 		$result = $this->object->getWebsiteTypes();
 		$this->assertInternalType('object', $result);
 		$this->assertInternalType('array', $result->results);
 		$this->assertGreaterThan(1, count($result->results));
 	}
-	
+
 	public function testGetLinkTypes() {
 		$result = $this->object->getLinkTypes();
 		$this->assertInternalType('object', $result);

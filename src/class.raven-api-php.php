@@ -75,13 +75,13 @@ class RavenToolsAPI {
    * @param array $engines
    */
   public function addDomain( $domain = '', $engines = array() ) {
-    if (!isset($domain) || empty($domain)):
+    if (!isset($domain) || empty($domain)) {
       throw new RavenToolsAPIException('The domain or engine was not set as part of this request. Required by addDomain().', 500);
-    endif;
+    }
 
-    if (is_array($engines) && !empty($engines)):
+    if (is_array($engines) && !empty($engines)) {
       $engines = implode(',', $engines);
-    endif;
+    }
 
     return $this->get('add_domain', array('domain'=>$domain,'engine_id'=>$engines) );
   }
@@ -92,9 +92,9 @@ class RavenToolsAPI {
    * @param string $domain
    */
   public function removeDomain ( $domain = '' ) {
-    if (!isset($domain) || empty($domain)):
+    if (!isset($domain) || empty($domain)) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by removeDomain().', 500);
-    endif;
+    }
 
     return $this->get('remove_domain', array('domain'=>$domain) );
   }
@@ -115,9 +115,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getDomainInfo( $domain = '' ) {
-    if ( empty($domain) ):
+    if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getDomainInfo().', 500);
-    endif;
+    }
 
     return $this->get('domain_info', array('domain'=>$domain) );
   }
@@ -133,9 +133,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getRank( $domain = '', $keyword = '', $start_date = '', $end_date = '', $engine = 'all' ) {
-    if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ):
+    if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ) {
       throw new RavenToolsAPIException('The domain, keyword, start date, end date or engine was not set as part of this request. Required by getRank().', 500);
-    endif;
+    }
 
     $start_date = date('Y-m-d', strtotime($start_date));
     $end_date = date('Y-m-d', strtotime($end_date));
@@ -152,9 +152,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getRankAll( $domain = '', $start_date = '', $end_date = '' ) {
-    if ( empty($domain) || empty($start_date) || empty($end_date) ):
+    if ( empty($domain) || empty($start_date) || empty($end_date) ) {
       throw new RavenToolsAPIException('The domain, start date or end date was not set as part of this request. Required by getRankAll().', 500);
-    endif;
+    }
 
     $start_date = date('Y-m-d', strtotime($start_date));
     $end_date = date('Y-m-d', strtotime($end_date));
@@ -170,9 +170,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getRankMaxWeek( $domain = '', $keyword = '' ) {
-    if ( empty($domain) || empty($keyword) ):
+    if ( empty($domain) || empty($keyword) ) {
       throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by getRankMaxWeek().', 500);
-    endif;
+    }
 
     return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword) );
   }
@@ -184,9 +184,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getCompetitors( $domain = '' ) {
-    if ( empty($domain) ):
+    if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getCompetitors().', 500);
-    endif;
+    }
 
     return $this->get('competitors', array('domain'=>$domain) );
   }
@@ -198,17 +198,17 @@ class RavenToolsAPI {
    * @return object
    */
   public function getKeywords( $domain = '' ) {
-    if ( empty($domain) ):
+    if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getKeywords().', 500);
-    endif;
+    }
 
     return $this->get('keywords', array('domain'=>$domain) );
   }
 
   public function getKeywordsTags( $domain = '' ) {
-    if ( empty($domain) ):
+    if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getKeywordsTags().', 500);
-    endif;
+    }
 
     return $this->get('keywords_tags', array('domain'=>$domain) );
   }
@@ -221,9 +221,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function addKeyword( $domain = '', $keyword = '' ) {
-    if ( empty($domain) || empty($keyword) ):
+    if ( empty($domain) || empty($keyword) ) {
       throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by addKeyword().', 500);
-    endif;
+    }
 
     return $this->get('add_keyword', array('domain'=>$domain,'keyword'=>$keyword) );
   }
@@ -236,9 +236,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function removeKeyword( $domain = '', $keyword = '' ) {
-    if ( empty($domain) || empty($keyword) ):
+    if ( empty($domain) || empty($keyword) ) {
       throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by removeKeyword().', 500);
-    endif;
+    }
 
     return $this->get('remove_keyword', array('domain'=>$domain,'keyword'=>$keyword) );
   }
@@ -250,9 +250,9 @@ class RavenToolsAPI {
    * @return object
    */
   public function getLinks( $domain = '' ) {
-    if ( empty($domain) ):
+    if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getLinks().', 500);
-    endif;
+    }
 
     return $this->get('get_links', array('domain'=>$domain) );
   }
@@ -273,6 +273,56 @@ class RavenToolsAPI {
    */
   public function getLinkTypes() {
     return $this->get('get_link_types');
+  }
+
+  /**
+   * Add Links
+   *
+   * @param string $domain
+   * @param array|string $links
+   * @return object
+   */
+  public function addLinks( $domain = '', $links = array() ) {
+    if ( empty($domain) ) {
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by addLinks().', 500);
+    }
+    $link = $this->check_json_object($links, 'addLinks');
+
+    return $this->get('add_links', array('domain'=>$domain, 'link'=>$link) );
+  }
+
+  /**
+   * Update Links
+   *
+   * @param string $domain
+   * @param array|string $links
+   * @return object
+   */
+  public function updateLinks( $domain = '', $links = array() ) {
+    if ( empty($domain) ) {
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by updateLinks().', 500);
+    }
+
+    $link = $this->check_json_object($links, 'updateLinks');
+
+    return $this->get('update_links', array('domain'=>$domain, 'link'=>$link) );
+  }
+
+  /**
+   * Delete Links
+   *
+   * @param string $domain
+   * @param array|string $links
+   * @return object
+   */
+  public function deleteLinks( $domain = '', $links = array() ) {
+    if ( empty($domain) ) {
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by deleteLinks().', 500);
+    }
+
+    $link = $this->check_json_object($links, 'deleteLinks');
+
+    return $this->get('delete_links', array('domain'=>$domain, 'link'=>$link) );
   }
 
   /* Core query methods */
@@ -343,11 +393,11 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
     } catch (Exception $e) {
       return false;
     }
-    if (is_array($result)):
+    if (is_array($result)) {
       return true;
-    else:
+    } else {
       return false;
-    endif;
+    }
   }
 
   /* Private methods */
@@ -363,7 +413,7 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
 
     $this->method = $method;
 
-    switch ($method):
+    switch ($method) {
 
       case 'rank':
         $this->required_fields = array('domain', 'keyword', 'start_date', 'end_date', 'engine');
@@ -443,11 +493,15 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
         $this->required_fields = array('domain', 'link');
       break;
 
+      case 'delete_links':
+        $this->required_fields = array('domain', 'link');
+      break;
+
       default:
         throw new RavenToolsAPIException("'{$method}' was not recognized as a valid method.", 500);
         break;
 
-    endswitch;
+    }
   }
 
   /**
@@ -474,9 +528,9 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    */
   private function check_required() {
     foreach ($this->required_fields as $field) {
-      if (!isset($this->$field) || empty($this->$field)):
+      if (!isset($this->$field) || empty($this->$field)) {
         throw new RavenToolsAPIException("The '{$field}' was not set as part of this request. Required by '{$this->method}' method.", 500);
-      endif;
+      }
     }
   }
 
@@ -488,19 +542,19 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    * @param array $options - An array of options passed from get(), getJSON() or getXML()
    * @return string - URL to be requested
    */
-  private function build_request_url($options = array()) {
+  private function build_request_url( $options = array() ) {
 
     // Take the options array and set the properties
-    foreach ($options as $key => $value):
+    foreach ($options as $key => $value) {
       $this->$key = $value;
-    endforeach;
+    }
 
     // Verify that every required attribute was specified, throw exception if not
     $this->check_required();
 
     // Begin building the URL for the request
     $url = self::end_point . '?key=' . $this->api_key . '&method=' . $this->method;
-    foreach ($this->required_fields as $field):
+    foreach ($this->required_fields as $field) {
       if (is_array($this->$field)):
         foreach ($this->$field as $k => $v):
           $url = $url . '&' . $field . '[]=' . urlencode($v);
@@ -508,18 +562,18 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
       else:
         $url = $url . '&' . $field . '=' . urlencode($this->$field);
       endif;
-    endforeach;
-    foreach ($this->optional_fields as $field):
-      if (!empty($this->$field)):
-        if (is_array($this->$field)):
-          foreach ($this->$field as $k => $v):
+    }
+    foreach ($this->optional_fields as $field) {
+      if (!empty($this->$field)) {
+        if (is_array($this->$field)) {
+          foreach ($this->$field as $k => $v) {
             $url = $url . '&' . $field . '[]=' . urlencode($v);
-          endforeach;
-        else:
+          }
+        } else {
           $url = $url . '&' . $field . '=' . urlencode($this->$field);
-        endif;
-      endif;
-    endforeach;
+        }
+      }
+    }
     $url = $url . '&format=' . $this->format;
 
     $this->request = $url;
@@ -538,11 +592,33 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    */
   private function parse_response($response) {
     $this->response = $response;
-    if (empty($this->response)):
+    if (empty($this->response)) {
       throw new RavenToolsAPIException("The request for '{$this->request}' returned an empty response.", 500);
-    endif;
+    }
 
     return $this->response;
+  }
+
+  /**
+   * Check JSON Object
+   *
+   * Encodes array into a JSON string, or passes JSON directly through
+   *
+   * @param string $object
+   * @param string $method
+   */
+  private function check_json_object( $object = array(), $method = '' ) {
+    if ( !is_array($object) ) {
+      $_tmp = json_decode($object);
+      if (!$_tmp || !is_array($_tmp) || count($_tmp) < 1) {
+        throw new RavenToolsAPIException("The items passed were not an array, not a JSON object or was empty. Required by {$method}().", 500);
+      } else {
+        // Already encoded JSON, pass directly along
+        return $object;
+      }
+    } else {
+      return json_encode($object);
+    }
   }
 
 }
@@ -560,8 +636,7 @@ class RavenToolsAPITransport {
    * @return string - Response from remote host
    * @link http://www.php.net/manual/en/function.curl-exec.php#98628
    */
-  public function curl($url, array $get = array(), array $options = array())
-  {
+  public function curl($url, array $get = array(), array $options = array()) {
       $defaults = array(
         CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get),
         CURLOPT_HEADER => 0,
@@ -573,11 +648,11 @@ class RavenToolsAPITransport {
       curl_setopt_array($ch, ($options + $defaults));
       $result = curl_exec($ch);
       $result_info = curl_getinfo($ch);
-      if ($result_info['http_code'] != 200 && $result_info['http_code'] != 201):
+      if ($result_info['http_code'] != 200 && $result_info['http_code'] != 201) {
         $msg = curl_error($ch) ? curl_error($ch) : 'Response: ' . $result;
         curl_close($ch);
         throw new RavenToolsAPIException($msg, $result_info['http_code']);
-      endif;
+      }
       curl_close($ch);
 
       return $result;
