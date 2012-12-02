@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a11" title="Raven Tools API for PHP">
-  <file path="class.raven-api-php.php" hash="b6b923a6a9c2ed725efc860a00a36f79" package="Default">
+  <file path="class.raven-api-php.php" hash="90f39a7fd850e2113be2a253505d3c53" package="Default">
     <docblock line="2">
       <description>Raven Tools API for PHP</description>
-      <long-description/>
+      <long-description></long-description>
     </docblock>
     <class final="false" abstract="false" namespace="global" line="20" package="RavenToolsAPI">
       <extends/>
@@ -19,7 +19,7 @@ require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
 $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-description>
         <tag line="6" name="link" description="https://github.com/stephenyeargin/raventools-api-php" link="https://github.com/stephenyeargin/raventools-api-php"/>
         <tag line="6" name="package" description="RavenToolsAPI"/>
-        <tag line="6" name="version" description="1.1"/>
+        <tag line="6" name="version" description="1.2"/>
       </docblock>
       <constant namespace="global" line="27" package="RavenToolsAPI">
         <name>api_version</name>
@@ -41,106 +41,106 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
       </constant>
       <property final="false" static="false" visibility="private" line="39" namespace="global" package="Default">
         <name>$api_key</name>
-        <default/>
+        <default></default>
         <docblock line="36">
           <description>API Key</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="private" line="44" namespace="global" package="Default">
         <name>$transport</name>
-        <default/>
+        <default></default>
         <docblock line="41">
           <description>Transport</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="49" namespace="global" package="Default">
         <name>$method</name>
-        <default/>
+        <default></default>
         <docblock line="46">
           <description>Method</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="54" namespace="global" package="Default">
         <name>$domain</name>
-        <default/>
+        <default></default>
         <docblock line="51">
           <description>Domain</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="59" namespace="global" package="Default">
         <name>$start_date</name>
-        <default/>
+        <default></default>
         <docblock line="56">
           <description>Start Date</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="64" namespace="global" package="Default">
         <name>$end_date</name>
-        <default/>
+        <default></default>
         <docblock line="61">
           <description>End Date</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="69" namespace="global" package="Default">
         <name>$engine</name>
-        <default/>
+        <default></default>
         <docblock line="66">
           <description>Search Engine</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="74" namespace="global" package="Default">
         <name>$keyword</name>
-        <default/>
+        <default></default>
         <docblock line="71">
           <description>Keyword</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="79" namespace="global" package="Default">
         <name>$format</name>
-        <default/>
+        <default></default>
         <docblock line="76">
           <description>Format</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="84" namespace="global" package="Default">
         <name>$request</name>
-        <default/>
+        <default></default>
         <docblock line="81">
           <description>API Request</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="89" namespace="global" package="Default">
         <name>$response</name>
-        <default/>
+        <default></default>
         <docblock line="86">
           <description>API Response</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="94" namespace="global" package="Default">
         <name>$required_fields</name>
-        <default/>
+        <default></default>
         <docblock line="91">
           <description>Required Fields</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <property final="false" static="false" visibility="public" line="99" namespace="global" package="Default">
         <name>$optional_fields</name>
-        <default/>
+        <default></default>
         <docblock line="96">
           <description>Optional Fields</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
       </property>
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="110" package="RavenToolsAPI">
@@ -685,7 +685,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="480">
           <name>$method</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="480">
@@ -714,7 +714,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="498">
           <name>$method</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="498">
@@ -743,7 +743,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="516">
           <name>$method</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="516">
@@ -773,7 +773,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="546">
           <name>$key</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -789,7 +789,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="569">
           <name>$method</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -856,7 +856,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="751">
           <name>$response</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -891,7 +891,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
       <full_name>\RavenToolsAPITransport</full_name>
       <docblock line="784">
         <description>Raven Tools API Transport</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="784" name="package" description="RavenToolsAPI"/>
       </docblock>
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="801" package="RavenToolsAPI">
@@ -916,7 +916,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="801">
           <name>$url</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="801">
@@ -937,7 +937,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
       <full_name>\RavenToolsAPIException</full_name>
       <docblock line="824">
         <description>Raven Tools API Exception Handler</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="824" name="package" description="RavenToolsAPI"/>
       </docblock>
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="838" package="RavenToolsAPI">
@@ -945,7 +945,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         <full_name>__construct</full_name>
         <docblock line="831">
           <description>Constructor</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="831" name="param" description="Error message" type="string" variable="$message">
             <type by_reference="false">string</type>
           </tag>
@@ -958,7 +958,7 @@ $Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-descr
         </docblock>
         <argument line="838">
           <name>$message</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="838">
