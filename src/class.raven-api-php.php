@@ -1,33 +1,112 @@
 <?php
+/**
+ * Raven Tools API for PHP
+ */
 
 /**
  * Raven Tools API PHP Class
  *
+ * The Raven Tools API allows developers to access and modify data within platform profiles and websites. For more information on the API, visit [their site](https://api.raventools.com/docs/).
+ *
+ * <code>// Path to the RavenAPI class
+ * require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
+ * // Instance to use for calls
+ * $Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
+ *
  * @link https://github.com/stephenyeargin/raventools-api-php
- * @package default
+ * @package RavenToolsAPI
  * @version 1.1
  */
 class RavenToolsAPI {
 
+  /**
+   * API Version
+   *
+   * Version of the Raven API to use
+   */
   const api_version = '1.0';
-  const end_point = 'https://api.raventools.com/api';
 
+  /**
+   * Endpoint
+   *
+   * Endpoint for connecting to the Raven API
+   */
+  const endpoint = 'https://api.raventools.com/api';
+
+  /**
+   * API Key
+   */
   private $api_key;
 
-  public $method;
-  public $domain;
-  public $start_date;
-  public $end_date;
-  public $engine;
-  public $keyword;
-  public $format;
-  public $request;
-  public $response;
-  public $required_fields;
-  public $optional_fields;
-
+  /**
+   * Transport
+   */
   private $transport;
 
+  /**
+   * Method
+   */
+  public $method;
+
+  /**
+   * Domain
+   */
+  public $domain;
+
+  /**
+   * Start Date
+   */
+  public $start_date;
+
+  /**
+   * End Date
+   */
+  public $end_date;
+
+  /**
+   * Search Engine
+   */
+  public $engine;
+
+  /**
+   * Keyword
+   */
+  public $keyword;
+
+  /**
+   * Format
+   */
+  public $format;
+
+  /**
+   * API Request
+   */
+  public $request;
+
+  /**
+   * API Response
+   */
+  public $response;
+
+  /**
+   * Required Fields
+   */
+  public $required_fields;
+
+  /**
+   * Optional Fields
+   */
+  public $optional_fields;
+
+  /**
+   * Constructor
+   *
+   * Instance of the Raven Tools API.
+   * <code>$Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
+   *
+   * @param string $api_key API Key provided within Raven
+   * @param object $transport Optional transport handler
+   */
   public function __construct($api_key = null, $transport = null) {
     $this->api_key = $api_key;
     $this->format = 'json';
@@ -42,18 +121,13 @@ class RavenToolsAPI {
 
   }
 
-  public function __set($name, $value) {
-    $this->$name = $value;
-  }
-
-  public function __get($name) {
-    return $this->$name;
-  }
-
   /**
-   * Get Profile Info
+   * Get Profile Information
    *
-   * @return object
+   * This request will return the name and billable keyword usage for the current profile.
+   * <code>$profile_info = $Raven->getProfileInfo();</code>
+   *
+   * @return object Profile information
    */
   public function getProfileInfo() {
     return $this->get('profile_info');
@@ -62,7 +136,10 @@ class RavenToolsAPI {
   /**
    * Get Domains
    *
-   * @return object
+   * This request will return the available domains for the profile associated with your API key.
+   * <code>$domains = $Raven->geDomains();</code>
+   *
+   * @return object API response
    */
   public function getDomains() {
     return $this->get('domains');
@@ -71,8 +148,12 @@ class RavenToolsAPI {
   /**
    * Add Domain
    *
-   * @param string $domain
-   * @param array $engines
+   * This request will add the domain provided.
+   * <code>$result = $Raven->addDomain($domain, $engines);</code>
+   *
+   * @param string $domain The domain name you want to add; "www." prefixes are ignored for purposes of matching ranks, but will be stored as part of the domain name for future requests
+   * @param array $engines Ordered array of search engine ids that you want to track for this domain
+   * @return object API response
    */
   public function addDomain( $domain = '', $engines = array() ) {
     if (!isset($domain) || empty($domain)) {
@@ -89,7 +170,11 @@ class RavenToolsAPI {
   /**
    * Remove Domain
    *
-   * @param string $domain
+   * This request will permanently remove the specified domain.
+   * <code>$result = $Raven->removeDomain($domain);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @return object API response
    */
   public function removeDomain ( $domain = '' ) {
     if (!isset($domain) || empty($domain)) {
@@ -102,7 +187,10 @@ class RavenToolsAPI {
   /**
    * Get Engines
    *
-   * @return object
+   * This request will return the available search engines for tracking keywords, to be used when adding or modifying domains.
+   * <code>$engines = $Raven->getEngines();</code>
+   *
+   * @return object API response
    */
   public function getEngines() {
     return $this->get('engines');
@@ -111,8 +199,11 @@ class RavenToolsAPI {
   /**
    * Get Domain Info
    *
-   * @param string $domain
-   * @return object
+   * This request will return the search engines for the domain provided.
+   * <code>$domain = $Raven->getDomainInfo($domain);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @return object API response
    */
   public function getDomainInfo( $domain = '' ) {
     if ( empty($domain) ) {
@@ -125,12 +216,15 @@ class RavenToolsAPI {
   /**
    * Get Rank
    *
-   * @param string $keyword
-   * @param string $domain
-   * @param string $start_date
-   * @param string $end_date
-   * @param string $engine
-   * @return object
+   * This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.
+   * <code>$rank = $Raven->getRank( $domain, $keyword, $start_date, $end_date, $engine );</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $keyword Keyword in the Keyword Manager of the given domain
+   * @param string $start_date Start date for rank
+   * @param string $end_date End date for rank
+   * @param string|array $engine String of 'all' or ordered array of engine_id
+   * @return object API response
    */
   public function getRank( $domain = '', $keyword = '', $start_date = '', $end_date = '', $engine = 'all' ) {
     if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ) {
@@ -146,10 +240,13 @@ class RavenToolsAPI {
   /**
    * Get Ranking for All Keywords
    *
-   * @param string $domain
-   * @param string $start_date
-   * @param string $end_date
-   * @return object
+   * This request will return a list of matches for a particular domain and date. You can only access results for domains and keywords that have been added to your account, including competitor domains.
+   * <code>$rank_all = $Raven->getRankAll( $domain, $start_date, $end_date );</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $start_date Start date for rank
+   * @param string $end_date End date for rank
+   * @return object API response
    */
   public function getRankAll( $domain = '', $start_date = '', $end_date = '' ) {
     if ( empty($domain) || empty($start_date) || empty($end_date) ) {
@@ -165,9 +262,12 @@ class RavenToolsAPI {
   /**
    * Get Ranking Max for a Week
    *
-   * @param string $domain
-   * @param string $keyword
-   * @return object
+   * This request returns the ISO Week number (YYYYWW) and date (YYYY-MM-DD) for the latest week with complete results for all keywords in a domain or a domain/keyword pair. It returns null for date/week and status = 'no data' for domains or domain/keywords that have no available data.
+   * <code>$rank_max_week = $Raven->getRankMaxWeek( $domain, $keyword );</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $keyword Keyword in the Keyword Manager of the given domain
+   * @return object API response
    */
   public function getRankMaxWeek( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ) {
@@ -180,8 +280,11 @@ class RavenToolsAPI {
   /**
    * Get Competitors
    *
-   * @param string $domain
-   * @return object
+   * This request will return the available competitors for the domain provided.
+   * <code>$competitors = $Raven->getCompetitors( $domain );</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @return object API response
    */
   public function getCompetitors( $domain = '' ) {
     if ( empty($domain) ) {
@@ -194,8 +297,11 @@ class RavenToolsAPI {
   /**
    * Get Keywords
    *
-   * @param string $domain
-   * @return object
+   * This request will return the available keywords for the domain provided.
+   * <code>$keywords = $Raven->getKeywords($domain);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @return object API response
    */
   public function getKeywords( $domain = '' ) {
     if ( empty($domain) ) {
@@ -205,6 +311,15 @@ class RavenToolsAPI {
     return $this->get('keywords', array('domain'=>$domain) );
   }
 
+  /**
+   * Get Keywords with Tags
+   *
+   * This request will return the available keywords and their tags for the domain provided.
+   * <code>$keywords = $Raven->getKeywordsTags($domain);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @return object API response
+   */
   public function getKeywordsTags( $domain = '' ) {
     if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getKeywordsTags().', 500);
@@ -216,9 +331,12 @@ class RavenToolsAPI {
   /**
    * Add Keyword
    *
-   * @param string $keyword
-   * @param string $domain
-   * @return object
+   * This request will add keyword to the domain provided.
+   * <code>$result = $Raven->addKeyword($domain, $keyword);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $keyword Keyword in the Keyword Manager of the given domain
+   * @return object API response
    */
   public function addKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ) {
@@ -231,9 +349,12 @@ class RavenToolsAPI {
   /**
    * Remove Keyword
    *
-   * @param string $keyword
-   * @param string $domain
-   * @return object
+   * This request will remove keyword from the domain provided.
+   * <code>$result = $Raven->removeKeyword($domain, $keyword);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $keyword Keyword in the Keyword Manager of the given domain
+   * @return object API response
    */
   public function removeKeyword( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ) {
@@ -246,21 +367,28 @@ class RavenToolsAPI {
   /**
    * Get Links
    *
-   * @param string $domain
-   * @return object
+   * This request will return the all links for the domain provided.
+   * <code>$links = $Raven->getLinks($domain, $tag);</code>
+   *
+   * @param string $domain Domain of website within the profile, must match exactly
+   * @param string $tag Filter results to a particular tag, must match exactly (optional)
+   * @return object API response
    */
-  public function getLinks( $domain = '' ) {
+  public function getLinks( $domain = '', $tag = '' ) {
     if ( empty($domain) ) {
       throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getLinks().', 500);
     }
 
-    return $this->get('get_links', array('domain'=>$domain) );
+    return $this->get('get_links', array('domain'=>$domain, 'tag'=>$tag) );
   }
 
   /**
    * Get Website Types
    *
-   * @return object
+   * This request will retrieve all of the default website types along with any custom website types your account setup in the sytem.
+   * <code>$website_types = $Raven->getWebsiteTypes();</code>
+   *
+   * @return object API response
    */
   public function getWebsiteTypes() {
     return $this->get('get_website_types');
@@ -269,7 +397,10 @@ class RavenToolsAPI {
   /**
    * Get Link Types
    *
-   * @return object
+   * This request will retrieve all of the default link types along with your custom link types your account has in the sytem.
+   * <code>$website_types = $Raven->getWebsiteTypes();</code>
+   *
+   * @return object API response
    */
   public function getLinkTypes() {
     return $this->get('get_link_types');
@@ -278,9 +409,12 @@ class RavenToolsAPI {
   /**
    * Add Links
    *
-   * @param string $domain
-   * @param array|string $links
-   * @return object
+   * This request allows you to pass in an array with link data for the links you would like to create and returns a list of new Link IDs.
+   * <code>$result = $Raven->addLinks($domain, $links);</code>
+   *
+   * @param string $domain The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record
+   * @param array|string $links Array of link objects or JSON encoded string
+   * @return object API response
    */
   public function addLinks( $domain = '', $links = array() ) {
     if ( empty($domain) ) {
@@ -294,9 +428,12 @@ class RavenToolsAPI {
   /**
    * Update Links
    *
-   * @param string $domain
-   * @param array|string $links
-   * @return object
+   * This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link IDs and if they were properly updated.
+   * <code>$result = $Raven->updateLinks($domain, $links);</code>
+   *
+   * @param string $domain The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record
+   * @param array|string $links Array of link objects or JSON encoded string
+   * @return object API response
    */
   public function updateLinks( $domain = '', $links = array() ) {
     if ( empty($domain) ) {
@@ -311,9 +448,12 @@ class RavenToolsAPI {
   /**
    * Delete Links
    *
-   * @param string $domain
-   * @param array|string $links
-   * @return object
+   * This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link ID's and if they were properly updated.
+   * <code>$result = $Raven->deleteLinks($domain, $links);</code>
+   *
+   * @param string $domain The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record
+   * @param array|string $links Array of link objects or JSON encoded string
+   * @return object API response
    */
   public function deleteLinks( $domain = '', $links = array() ) {
     if ( empty($domain) ) {
@@ -330,8 +470,11 @@ class RavenToolsAPI {
   /**
    * Get JSON
    *
-   * @param string $method - defines specific method to query (part of query string, sets required fields)
-   * @param array $options - defines options to be passed to query string
+   * Retrieves a JSON string in response to a particular API method and options.
+   * <code>$result = $Raven->getJSON($method, $options);</code>
+   *
+   * @param string $method Defines specific method to query (part of query string, sets required fields)
+   * @param array $options Defines options to be passed to query string
    * @return string - JSON response
    */
   public function getJSON($method, $options = array()) {
@@ -345,9 +488,12 @@ class RavenToolsAPI {
   /**
    * Get XML
    *
-   * @param string $method - defines specific method to query (part of query string, sets required fields)
-   * @param array $options - defines options to be passed to query string
-   * @return string - XML response
+   * Retrieves an XML string in response to a particular API method and options.
+   * <code>$result = $Raven->getXML($method, $options);</code>
+   *
+   * @param string $method Defines specific method to query (part of query string, sets required fields)
+   * @param array $options Defines options to be passed to query string
+   * @return string XML response
    */
   public function getXML($method, $options = array()) {
     $this->format = 'xml';
@@ -360,15 +506,17 @@ class RavenToolsAPI {
   /**
    * Get PHP Object
    *
-   * @param string $method - defines specific method to query (part of query string, sets required fields)
-   * @param array $options - defines options to be passed to query string
-   * @return object - decoded JSON response
+   * Retrieves a PHP object in response to a particular API method and options.
+   * <code>$result = $Raven->get($method, $options);</code>
+   *
+   * @param string $method Defines specific method to query (part of query string, sets required fields)
+   * @param array $options Defines options to be passed to query string
+   * @return object API response
    */
   public function get($method, $options = array()) {
     $this->setMethod($method);
     if ($this->format == 'json') {
       $response = $this->getJSON($method, $options);
-file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
 
       return json_decode($response);
     } else {
@@ -383,8 +531,17 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
   /**
    * Validate API Key
    *
-   * @param string $key - Key to be validated
-   * @return boolean - true upon success, false if no response
+   * Validates a given API Key before issuing commands.
+   *
+   * <code>
+   * if (RavenToolsAPI::validateAPIKey('somekey') == true) {
+   *   echo 'valid key';
+   * } else {
+   *   echo 'invalid key';
+   * }</code>
+   *
+   * @param string $key Key to be validated
+   * @return boolean True upon success, false if no response
    */
   public static function validateAPIKey($key) {
     $testing = new self($key);
@@ -486,15 +643,18 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
       break;
 
       case 'add_links':
-        $this->required_fields = array('domain', 'link');
+        $this->required_fields = array('link');
+        $this->optional_fields = array('domain');
       break;
 
       case 'update_links':
-        $this->required_fields = array('domain', 'link');
+        $this->required_fields = array('link');
+        $this->optional_fields = array('domain');
       break;
 
       case 'delete_links':
-        $this->required_fields = array('domain', 'link');
+        $this->required_fields = array('link');
+        $this->optional_fields = array('domain');
       break;
 
       default:
@@ -509,8 +669,8 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    *
    * Primary processing method. Makes the call to build the URL, error checks and processes the cURL request.
    *
-   * @param string $options - Options passed from get(), getJSON() or getXML()
-   * @return object/string/boolean - Response from query or false
+   * @param string $options Options passed from get(), getJSON() or getXML()
+   * @return object|string|boolean Response from query or false
    */
   private function get_response($options = array()) {
     $url = $this->build_request_url($options);
@@ -523,8 +683,6 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    * Check Required Fields
    *
    * Iterates through the 'required_fields' property array to ensure that all necessary properties are set prior to a request being made.
-   *
-   * @return object
    */
   private function check_required() {
     foreach ($this->required_fields as $field) {
@@ -539,8 +697,8 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    *
    * Constructs the URL to send based on the options passed in. Only uses those in the required_fields and optional_fields properties.
    *
-   * @param array $options - An array of options passed from get(), getJSON() or getXML()
-   * @return string - URL to be requested
+   * @param array $options An array of options passed from get(), getJSON() or getXML()
+   * @return string URL to be requested
    */
   private function build_request_url( $options = array() ) {
 
@@ -553,7 +711,7 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
     $this->check_required();
 
     // Begin building the URL for the request
-    $url = self::end_point . '?key=' . $this->api_key . '&method=' . $this->method;
+    $url = self::endpoint . '?key=' . $this->api_key . '&method=' . $this->method;
     foreach ($this->required_fields as $field) {
       if (is_array($this->$field)):
         foreach ($this->$field as $k => $v):
@@ -587,8 +745,8 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    *
    * Adds an error condition if the response is empty.
    *
-   * @param string $response - Response in string format.
-   * @return string - Response in string format.
+   * @param string $response Response in string format.
+   * @return string Response in string format.
    */
   private function parse_response($response) {
     $this->response = $response;
@@ -604,8 +762,8 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
    *
    * Encodes array into a JSON string, or passes JSON directly through
    *
-   * @param string $object
-   * @param string $method
+   * @param string $object Object or JSON string to be checked
+   * @param string $method Associated method name
    */
   private function check_json_object( $object = array(), $method = '' ) {
     if ( !is_array($object) ) {
@@ -625,15 +783,19 @@ file_put_contents( '/tmp/ravenapi-' . $method . time(), $response);
 
 /**
  * Raven Tools API Transport
+ *
+ * @package RavenToolsAPI
  */
 class RavenToolsAPITransport {
   /**
-   * cURL
+   * cURL Request
    *
-   * @param string $url - URL to query
-   * @param array $get - Associative array of $_GET query string parameters
-   * @param array $options - Specific cURL options
-   * @return string - Response from remote host
+   * Interacts with PHP's cURL methods to retrieve API response.
+   *
+   * @param string $url URL to query
+   * @param array $get Associative array of $_GET query string parameters
+   * @param array $options Specific cURL options
+   * @return string Response from remote host
    * @link http://www.php.net/manual/en/function.curl-exec.php#98628
    */
   public function curl($url, array $get = array(), array $options = array()) {
@@ -661,9 +823,20 @@ class RavenToolsAPITransport {
 
 /**
  * Raven Tools API Exception Handler
+ *
+ * @package RavenToolsAPI
  */
 class RavenToolsAPIException extends Exception {
+
+  /**
+   * Constructor
+   *
+   * @param string $message Error message
+   * @param int $code Error code
+   * @param Exception $previous
+   */
   public function __construct($message, $code = 0, Exception $previous = null) {
     parent::__construct($message, $code, $previous);
   }
+
 }
