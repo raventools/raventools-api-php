@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a11" title="Raven Tools API for PHP">
+  <file path="class.raven-api-php.php" hash="b6b923a6a9c2ed725efc860a00a36f79" package="Default">
+    <docblock line="2">
+      <description>Raven Tools API for PHP</description>
+      <long-description/>
+    </docblock>
+    <class final="false" abstract="false" namespace="global" line="20" package="RavenToolsAPI">
+      <extends/>
+      <name>RavenToolsAPI</name>
+      <full_name>\RavenToolsAPI</full_name>
+      <docblock line="6">
+        <description>Raven Tools API PHP Class</description>
+        <long-description>&lt;p&gt;The Raven Tools API allows developers to access and modify data within platform profiles and websites. For more information on the API, visit &lt;a href="https://api.raventools.com/docs/"&gt;their site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Path to the RavenAPI class
+require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
+// Instance to use for calls
+$Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-description>
+        <tag line="6" name="link" description="https://github.com/stephenyeargin/raventools-api-php" link="https://github.com/stephenyeargin/raventools-api-php"/>
+        <tag line="6" name="package" description="RavenToolsAPI"/>
+        <tag line="6" name="version" description="1.1"/>
+      </docblock>
+      <constant namespace="global" line="27" package="RavenToolsAPI">
+        <name>api_version</name>
+        <full_name>api_version</full_name>
+        <value>'1.0'</value>
+        <docblock line="22">
+          <description>API Version</description>
+          <long-description>&lt;p&gt;Version of the Raven API to use&lt;/p&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="34" package="RavenToolsAPI">
+        <name>endpoint</name>
+        <full_name>endpoint</full_name>
+        <value>'https://api.raventools.com/api'</value>
+        <docblock line="29">
+          <description>Endpoint</description>
+          <long-description>&lt;p&gt;Endpoint for connecting to the Raven API&lt;/p&gt;</long-description>
+        </docblock>
+      </constant>
+      <property final="false" static="false" visibility="private" line="39" namespace="global" package="Default">
+        <name>$api_key</name>
+        <default/>
+        <docblock line="36">
+          <description>API Key</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="44" namespace="global" package="Default">
+        <name>$transport</name>
+        <default/>
+        <docblock line="41">
+          <description>Transport</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="49" namespace="global" package="Default">
+        <name>$method</name>
+        <default/>
+        <docblock line="46">
+          <description>Method</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="54" namespace="global" package="Default">
+        <name>$domain</name>
+        <default/>
+        <docblock line="51">
+          <description>Domain</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="59" namespace="global" package="Default">
+        <name>$start_date</name>
+        <default/>
+        <docblock line="56">
+          <description>Start Date</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="64" namespace="global" package="Default">
+        <name>$end_date</name>
+        <default/>
+        <docblock line="61">
+          <description>End Date</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="69" namespace="global" package="Default">
+        <name>$engine</name>
+        <default/>
+        <docblock line="66">
+          <description>Search Engine</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="74" namespace="global" package="Default">
+        <name>$keyword</name>
+        <default/>
+        <docblock line="71">
+          <description>Keyword</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="79" namespace="global" package="Default">
+        <name>$format</name>
+        <default/>
+        <docblock line="76">
+          <description>Format</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="84" namespace="global" package="Default">
+        <name>$request</name>
+        <default/>
+        <docblock line="81">
+          <description>API Request</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="89" namespace="global" package="Default">
+        <name>$response</name>
+        <default/>
+        <docblock line="86">
+          <description>API Response</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="94" namespace="global" package="Default">
+        <name>$required_fields</name>
+        <default/>
+        <docblock line="91">
+          <description>Required Fields</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="99" namespace="global" package="Default">
+        <name>$optional_fields</name>
+        <default/>
+        <docblock line="96">
+          <description>Optional Fields</description>
+          <long-description/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="110" package="RavenToolsAPI">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="101">
+          <description>Constructor</description>
+          <long-description>&lt;p&gt;Instance of the Raven Tools API.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$Raven = new RavenToolsAPI('YOUR_API_KEY');&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="101" name="param" description="API Key provided within Raven" type="string" variable="$api_key">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="101" name="param" description="Optional transport handler" type="object" variable="$transport">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="110">
+          <name>$api_key</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="110">
+          <name>$transport</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="132" package="RavenToolsAPI">
+        <name>getProfileInfo</name>
+        <full_name>getProfileInfo</full_name>
+        <docblock line="124">
+          <description>Get Profile Information</description>
+          <long-description>&lt;p&gt;This request will return the name and billable keyword usage for the current profile.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$profile_info = $Raven-&gt;getProfileInfo();&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="124" name="return" description="Profile information" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="144" package="RavenToolsAPI">
+        <name>getDomains</name>
+        <full_name>getDomains</full_name>
+        <docblock line="136">
+          <description>Get Domains</description>
+          <long-description>&lt;p&gt;This request will return the available domains for the profile associated with your API key.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$domains = $Raven-&gt;geDomains();&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="136" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="158" package="RavenToolsAPI">
+        <name>addDomain</name>
+        <full_name>addDomain</full_name>
+        <docblock line="148">
+          <description>Add Domain</description>
+          <long-description>&lt;p&gt;This request will add the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;addDomain($domain, $engines);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="148" name="param" description="The domain name you want to add; &quot;www.&quot; prefixes are ignored for purposes of matching ranks, but will be stored as part of the domain name for future requests" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="148" name="param" description="Ordered array of search engine ids that you want to track for this domain" type="array" variable="$engines">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="148" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="158">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="158">
+          <name>$engines</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="179" package="RavenToolsAPI">
+        <name>removeDomain</name>
+        <full_name>removeDomain</full_name>
+        <docblock line="170">
+          <description>Remove Domain</description>
+          <long-description>&lt;p&gt;This request will permanently remove the specified domain.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;removeDomain($domain);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="170" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="170" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="179">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="195" package="RavenToolsAPI">
+        <name>getEngines</name>
+        <full_name>getEngines</full_name>
+        <docblock line="187">
+          <description>Get Engines</description>
+          <long-description>&lt;p&gt;This request will return the available search engines for tracking keywords, to be used when adding or modifying domains.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$engines = $Raven-&gt;getEngines();&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="187" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="208" package="RavenToolsAPI">
+        <name>getDomainInfo</name>
+        <full_name>getDomainInfo</full_name>
+        <docblock line="199">
+          <description>Get Domain Info</description>
+          <long-description>&lt;p&gt;This request will return the search engines for the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$domain = $Raven-&gt;getDomainInfo($domain);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="199" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="199" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="208">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="229" package="RavenToolsAPI">
+        <name>getRank</name>
+        <full_name>getRank</full_name>
+        <docblock line="216">
+          <description>Get Rank</description>
+          <long-description>&lt;p&gt;This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$rank = $Raven-&gt;getRank( $domain, $keyword, $start_date, $end_date, $engine );&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="216" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="216" name="param" description="Keyword in the Keyword Manager of the given domain" type="string" variable="$keyword">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="216" name="param" description="Start date for rank" type="string" variable="$start_date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="216" name="param" description="End date for rank" type="string" variable="$end_date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="216" name="param" description="String of 'all' or ordered array of engine_id" type="string|array" variable="$engine">
+            <type by_reference="false">string</type>
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="216" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="229">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="229">
+          <name>$keyword</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="229">
+          <name>$start_date</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="229">
+          <name>$end_date</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="229">
+          <name>$engine</name>
+          <default>'all'</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="251" package="RavenToolsAPI">
+        <name>getRankAll</name>
+        <full_name>getRankAll</full_name>
+        <docblock line="240">
+          <description>Get Ranking for All Keywords</description>
+          <long-description>&lt;p&gt;This request will return a list of matches for a particular domain and date. You can only access results for domains and keywords that have been added to your account, including competitor domains.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$rank_all = $Raven-&gt;getRankAll( $domain, $start_date, $end_date );&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="240" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="240" name="param" description="Start date for rank" type="string" variable="$start_date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="240" name="param" description="End date for rank" type="string" variable="$end_date">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="240" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="251">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="251">
+          <name>$start_date</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="251">
+          <name>$end_date</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="272" package="RavenToolsAPI">
+        <name>getRankMaxWeek</name>
+        <full_name>getRankMaxWeek</full_name>
+        <docblock line="262">
+          <description>Get Ranking Max for a Week</description>
+          <long-description>&lt;p&gt;This request returns the ISO Week number (YYYYWW) and date (YYYY-MM-DD) for the latest week with complete results for all keywords in a domain or a domain/keyword pair. It returns null for date/week and status = 'no data' for domains or domain/keywords that have no available data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$rank_max_week = $Raven-&gt;getRankMaxWeek( $domain, $keyword );&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="262" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="262" name="param" description="Keyword in the Keyword Manager of the given domain" type="string" variable="$keyword">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="262" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="272">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="272">
+          <name>$keyword</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="289" package="RavenToolsAPI">
+        <name>getCompetitors</name>
+        <full_name>getCompetitors</full_name>
+        <docblock line="280">
+          <description>Get Competitors</description>
+          <long-description>&lt;p&gt;This request will return the available competitors for the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$competitors = $Raven-&gt;getCompetitors( $domain );&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="280" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="280" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="289">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="RavenToolsAPI">
+        <name>getKeywords</name>
+        <full_name>getKeywords</full_name>
+        <docblock line="297">
+          <description>Get Keywords</description>
+          <long-description>&lt;p&gt;This request will return the available keywords for the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$keywords = $Raven-&gt;getKeywords($domain);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="297" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="297" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="306">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="323" package="RavenToolsAPI">
+        <name>getKeywordsTags</name>
+        <full_name>getKeywordsTags</full_name>
+        <docblock line="314">
+          <description>Get Keywords with Tags</description>
+          <long-description>&lt;p&gt;This request will return the available keywords and their tags for the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$keywords = $Raven-&gt;getKeywordsTags($domain);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="314" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="314" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="323">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="341" package="RavenToolsAPI">
+        <name>addKeyword</name>
+        <full_name>addKeyword</full_name>
+        <docblock line="331">
+          <description>Add Keyword</description>
+          <long-description>&lt;p&gt;This request will add keyword to the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;addKeyword($domain, $keyword);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="331" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="331" name="param" description="Keyword in the Keyword Manager of the given domain" type="string" variable="$keyword">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="331" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="341">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="341">
+          <name>$keyword</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="359" package="RavenToolsAPI">
+        <name>removeKeyword</name>
+        <full_name>removeKeyword</full_name>
+        <docblock line="349">
+          <description>Remove Keyword</description>
+          <long-description>&lt;p&gt;This request will remove keyword from the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;removeKeyword($domain, $keyword);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="349" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="349" name="param" description="Keyword in the Keyword Manager of the given domain" type="string" variable="$keyword">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="349" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="359">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="359">
+          <name>$keyword</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="377" package="RavenToolsAPI">
+        <name>getLinks</name>
+        <full_name>getLinks</full_name>
+        <docblock line="367">
+          <description>Get Links</description>
+          <long-description>&lt;p&gt;This request will return the all links for the domain provided.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$links = $Raven-&gt;getLinks($domain, $tag);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="367" name="param" description="Domain of website within the profile, must match exactly" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="367" name="param" description="Filter results to a particular tag, must match exactly (optional)" type="string" variable="$tag">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="367" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="377">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="377">
+          <name>$tag</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="393" package="RavenToolsAPI">
+        <name>getWebsiteTypes</name>
+        <full_name>getWebsiteTypes</full_name>
+        <docblock line="385">
+          <description>Get Website Types</description>
+          <long-description>&lt;p&gt;This request will retrieve all of the default website types along with any custom website types your account setup in the sytem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$website_types = $Raven-&gt;getWebsiteTypes();&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="385" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="405" package="RavenToolsAPI">
+        <name>getLinkTypes</name>
+        <full_name>getLinkTypes</full_name>
+        <docblock line="397">
+          <description>Get Link Types</description>
+          <long-description>&lt;p&gt;This request will retrieve all of the default link types along with your custom link types your account has in the sytem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$website_types = $Raven-&gt;getWebsiteTypes();&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="397" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="419" package="RavenToolsAPI">
+        <name>addLinks</name>
+        <full_name>addLinks</full_name>
+        <docblock line="409">
+          <description>Add Links</description>
+          <long-description>&lt;p&gt;This request allows you to pass in an array with link data for the links you would like to create and returns a list of new Link IDs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;addLinks($domain, $links);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="409" name="param" description="The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="409" name="param" description="Array of link objects or JSON encoded string" type="array|string" variable="$links">
+            <type by_reference="false">array</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="409" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="419">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="419">
+          <name>$links</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="438" package="RavenToolsAPI">
+        <name>updateLinks</name>
+        <full_name>updateLinks</full_name>
+        <docblock line="428">
+          <description>Update Links</description>
+          <long-description>&lt;p&gt;This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link IDs and if they were properly updated.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;updateLinks($domain, $links);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="428" name="param" description="The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="428" name="param" description="Array of link objects or JSON encoded string" type="array|string" variable="$links">
+            <type by_reference="false">array</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="428" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="438">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="438">
+          <name>$links</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="458" package="RavenToolsAPI">
+        <name>deleteLinks</name>
+        <full_name>deleteLinks</full_name>
+        <docblock line="448">
+          <description>Delete Links</description>
+          <long-description>&lt;p&gt;This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link ID's and if they were properly updated.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;deleteLinks($domain, $links);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="448" name="param" description="The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record" type="string" variable="$domain">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="448" name="param" description="Array of link objects or JSON encoded string" type="array|string" variable="$links">
+            <type by_reference="false">array</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="448" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="458">
+          <name>$domain</name>
+          <default>''</default>
+          <type/>
+        </argument>
+        <argument line="458">
+          <name>$links</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="480" package="RavenToolsAPI">
+        <name>getJSON</name>
+        <full_name>getJSON</full_name>
+        <docblock line="470">
+          <description>Get JSON</description>
+          <long-description>&lt;p&gt;Retrieves a JSON string in response to a particular API method and options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;getJSON($method, $options);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="470" name="param" description="Defines specific method to query (part of query string, sets required fields)" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="470" name="param" description="Defines options to be passed to query string" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="470" name="return" description="- JSON response" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="480">
+          <name>$method</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="480">
+          <name>$options</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="498" package="RavenToolsAPI">
+        <name>getXML</name>
+        <full_name>getXML</full_name>
+        <docblock line="488">
+          <description>Get XML</description>
+          <long-description>&lt;p&gt;Retrieves an XML string in response to a particular API method and options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;getXML($method, $options);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="488" name="param" description="Defines specific method to query (part of query string, sets required fields)" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="488" name="param" description="Defines options to be passed to query string" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="488" name="return" description="XML response" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="498">
+          <name>$method</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="498">
+          <name>$options</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="516" package="RavenToolsAPI">
+        <name>get</name>
+        <full_name>get</full_name>
+        <docblock line="506">
+          <description>Get PHP Object</description>
+          <long-description>&lt;p&gt;Retrieves a PHP object in response to a particular API method and options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$result = $Raven-&gt;get($method, $options);&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="506" name="param" description="Defines specific method to query (part of query string, sets required fields)" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="506" name="param" description="Defines options to be passed to query string" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="506" name="return" description="API response" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="516">
+          <name>$method</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="516">
+          <name>$options</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="546" package="RavenToolsAPI">
+        <name>validateAPIKey</name>
+        <full_name>validateAPIKey</full_name>
+        <docblock line="531">
+          <description>Validate API Key</description>
+          <long-description>&lt;p&gt;Validates a given API Key before issuing commands.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (RavenToolsAPI::validateAPIKey('somekey') == true) {
+  echo 'valid key';
+} else {
+  echo 'invalid key';
+}&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="531" name="param" description="Key to be validated" type="string" variable="$key">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="531" name="return" description="True upon success, false if no response" type="boolean">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
+        <argument line="546">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="569" package="RavenToolsAPI">
+        <name>setMethod</name>
+        <full_name>setMethod</full_name>
+        <docblock line="562">
+          <description>Set Method</description>
+          <long-description>&lt;p&gt;Sets the method for a particular request and defines the required and optional fields for each.&lt;/p&gt;</long-description>
+          <tag line="562" name="param" description="- One of the available objects from the Raven API" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="569">
+          <name>$method</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="675" package="RavenToolsAPI">
+        <name>get_response</name>
+        <full_name>get_response</full_name>
+        <docblock line="667">
+          <description>Get Response</description>
+          <long-description>&lt;p&gt;Primary processing method. Makes the call to build the URL, error checks and processes the cURL request.&lt;/p&gt;</long-description>
+          <tag line="667" name="param" description="Options passed from get(), getJSON() or getXML()" type="string" variable="$options">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="667" name="return" description="Response from query or false" type="object|string|boolean">
+            <type by_reference="false">object</type>
+            <type by_reference="false">string</type>
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
+        <argument line="675">
+          <name>$options</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="687" package="RavenToolsAPI">
+        <name>check_required</name>
+        <full_name>check_required</full_name>
+        <docblock line="682">
+          <description>Check Required Fields</description>
+          <long-description>&lt;p&gt;Iterates through the 'required_fields' property array to ensure that all necessary properties are set prior to a request being made.&lt;/p&gt;</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="703" package="RavenToolsAPI">
+        <name>build_request_url</name>
+        <full_name>build_request_url</full_name>
+        <docblock line="695">
+          <description>Build Request URL</description>
+          <long-description>&lt;p&gt;Constructs the URL to send based on the options passed in. Only uses those in the required_fields and optional_fields properties.&lt;/p&gt;</long-description>
+          <tag line="695" name="param" description="An array of options passed from get(), getJSON() or getXML()" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="695" name="return" description="URL to be requested" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="703">
+          <name>$options</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="751" package="RavenToolsAPI">
+        <name>parse_response</name>
+        <full_name>parse_response</full_name>
+        <docblock line="743">
+          <description>Parse Response</description>
+          <long-description>&lt;p&gt;Adds an error condition if the response is empty.&lt;/p&gt;</long-description>
+          <tag line="743" name="param" description="Response in string format." type="string" variable="$response">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="743" name="return" description="Response in string format." type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="751">
+          <name>$response</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="768" package="RavenToolsAPI">
+        <name>check_json_object</name>
+        <full_name>check_json_object</full_name>
+        <docblock line="760">
+          <description>Check JSON Object</description>
+          <long-description>&lt;p&gt;Encodes array into a JSON string, or passes JSON directly through&lt;/p&gt;</long-description>
+          <tag line="760" name="param" description="Object or JSON string to be checked" type="string" variable="$object">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="760" name="param" description="Associated method name" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="768">
+          <name>$object</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+        <argument line="768">
+          <name>$method</name>
+          <default>''</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="789" package="RavenToolsAPI">
+      <extends/>
+      <name>RavenToolsAPITransport</name>
+      <full_name>\RavenToolsAPITransport</full_name>
+      <docblock line="784">
+        <description>Raven Tools API Transport</description>
+        <long-description/>
+        <tag line="784" name="package" description="RavenToolsAPI"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="801" package="RavenToolsAPI">
+        <name>curl</name>
+        <full_name>curl</full_name>
+        <docblock line="790">
+          <description>cURL Request</description>
+          <long-description>&lt;p&gt;Interacts with PHP's cURL methods to retrieve API response.&lt;/p&gt;</long-description>
+          <tag line="790" name="param" description="URL to query" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="790" name="param" description="Associative array of $_GET query string parameters" type="array" variable="$get">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="790" name="param" description="Specific cURL options" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="790" name="return" description="Response from remote host" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="790" name="link" description="http://www.php.net/manual/en/function.curl-exec.php#98628" link="http://www.php.net/manual/en/function.curl-exec.php#98628"/>
+        </docblock>
+        <argument line="801">
+          <name>$url</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="801">
+          <name>$get</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+        <argument line="801">
+          <name>$options</name>
+          <default>array()</default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="829" package="RavenToolsAPI">
+      <extends>\Exception</extends>
+      <name>RavenToolsAPIException</name>
+      <full_name>\RavenToolsAPIException</full_name>
+      <docblock line="824">
+        <description>Raven Tools API Exception Handler</description>
+        <long-description/>
+        <tag line="824" name="package" description="RavenToolsAPI"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="838" package="RavenToolsAPI">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="831">
+          <description>Constructor</description>
+          <long-description/>
+          <tag line="831" name="param" description="Error message" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="831" name="param" description="Error code" type="int" variable="$code">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="831" name="param" description="" type="\Exception" variable="$previous">
+            <type by_reference="false">\Exception</type>
+          </tag>
+        </docblock>
+        <argument line="838">
+          <name>$message</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="838">
+          <name>$code</name>
+          <default>0</default>
+          <type/>
+        </argument>
+        <argument line="838">
+          <name>$previous</name>
+          <default>null</default>
+          <type>\Exception</type>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="RavenToolsAPI" full_name="RavenToolsAPI"/>
+  <namespace name="global" full_name="global"/>
+  <marker count="0">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>

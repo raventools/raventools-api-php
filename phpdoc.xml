@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>Raven Tools API for PHP</title>
+    <parser>
+        <target>output</target>
+        <markers>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility></visibility>
+    </parser>
+    <transformer>
+        <target>output</target>
+    </transformer>
+    <transformations>
+        <template name="responsive" />
+    </transformations>
+    <files>
+        <directory>src</directory>
+        <ignore>tests/*</ignore>
+        <ignore>vendor/*</ignore>
+    </files>
+</phpdoc>

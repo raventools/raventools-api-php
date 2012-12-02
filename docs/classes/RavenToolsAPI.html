@@ -1,0 +1,815 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Raven Tools API for PHP » \RavenToolsAPI</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Raven Tools API for PHP</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/RavenToolsAPI.html"><i class="icon-folder-open"></i> RavenToolsAPI</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_addDomain" title="addDomain :: Add Domain"><span class="description">Add Domain</span><pre>addDomain()</pre></a></li>
+<li class="method public "><a href="#method_addKeyword" title="addKeyword :: Add Keyword"><span class="description">Add Keyword</span><pre>addKeyword()</pre></a></li>
+<li class="method public "><a href="#method_addLinks" title="addLinks :: Add Links"><span class="description">Add Links</span><pre>addLinks()</pre></a></li>
+<li class="method public "><a href="#method_deleteLinks" title="deleteLinks :: Delete Links"><span class="description">Delete Links</span><pre>deleteLinks()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Get PHP Object"><span class="description">Get PHP Object</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getCompetitors" title="getCompetitors :: Get Competitors"><span class="description">Get Competitors</span><pre>getCompetitors()</pre></a></li>
+<li class="method public "><a href="#method_getDomainInfo" title="getDomainInfo :: Get Domain Info"><span class="description">Get Domain Info</span><pre>getDomainInfo()</pre></a></li>
+<li class="method public "><a href="#method_getDomains" title="getDomains :: Get Domains"><span class="description">Get Domains</span><pre>getDomains()</pre></a></li>
+<li class="method public "><a href="#method_getEngines" title="getEngines :: Get Engines"><span class="description">Get Engines</span><pre>getEngines()</pre></a></li>
+<li class="method public "><a href="#method_getJSON" title="getJSON :: Get JSON"><span class="description">Get JSON</span><pre>getJSON()</pre></a></li>
+<li class="method public "><a href="#method_getKeywords" title="getKeywords :: Get Keywords"><span class="description">Get Keywords</span><pre>getKeywords()</pre></a></li>
+<li class="method public "><a href="#method_getKeywordsTags" title="getKeywordsTags :: Get Keywords with Tags"><span class="description">Get Keywords with Tags</span><pre>getKeywordsTags()</pre></a></li>
+<li class="method public "><a href="#method_getLinkTypes" title="getLinkTypes :: Get Link Types"><span class="description">Get Link Types</span><pre>getLinkTypes()</pre></a></li>
+<li class="method public "><a href="#method_getLinks" title="getLinks :: Get Links"><span class="description">Get Links</span><pre>getLinks()</pre></a></li>
+<li class="method public "><a href="#method_getProfileInfo" title="getProfileInfo :: Get Profile Information"><span class="description">Get Profile Information</span><pre>getProfileInfo()</pre></a></li>
+<li class="method public "><a href="#method_getRank" title="getRank :: Get Rank"><span class="description">Get Rank</span><pre>getRank()</pre></a></li>
+<li class="method public "><a href="#method_getRankAll" title="getRankAll :: Get Ranking for All Keywords"><span class="description">Get Ranking for All Keywords</span><pre>getRankAll()</pre></a></li>
+<li class="method public "><a href="#method_getRankMaxWeek" title="getRankMaxWeek :: Get Ranking Max for a Week"><span class="description">Get Ranking Max for a Week</span><pre>getRankMaxWeek()</pre></a></li>
+<li class="method public "><a href="#method_getWebsiteTypes" title="getWebsiteTypes :: Get Website Types"><span class="description">Get Website Types</span><pre>getWebsiteTypes()</pre></a></li>
+<li class="method public "><a href="#method_getXML" title="getXML :: Get XML"><span class="description">Get XML</span><pre>getXML()</pre></a></li>
+<li class="method public "><a href="#method_removeDomain" title="removeDomain :: Remove Domain"><span class="description">Remove Domain</span><pre>removeDomain()</pre></a></li>
+<li class="method public "><a href="#method_removeKeyword" title="removeKeyword :: Remove Keyword"><span class="description">Remove Keyword</span><pre>removeKeyword()</pre></a></li>
+<li class="method public "><a href="#method_updateLinks" title="updateLinks :: Update Links"><span class="description">Update Links</span><pre>updateLinks()</pre></a></li>
+<li class="method public "><a href="#method_validateAPIKey" title="validateAPIKey :: Validate API Key"><span class="description">Validate API Key</span><pre>validateAPIKey()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private "><a href="#method_build_request_url" title="build_request_url :: Build Request URL"><span class="description">Build Request URL</span><pre>build_request_url()</pre></a></li>
+<li class="method private "><a href="#method_check_json_object" title="check_json_object :: Check JSON Object"><span class="description">Check JSON Object</span><pre>check_json_object()</pre></a></li>
+<li class="method private "><a href="#method_check_required" title="check_required :: Check Required Fields"><span class="description">Check Required Fields</span><pre>check_required()</pre></a></li>
+<li class="method private "><a href="#method_get_response" title="get_response :: Get Response"><span class="description">Get Response</span><pre>get_response()</pre></a></li>
+<li class="method private "><a href="#method_parse_response" title="parse_response :: Parse Response"><span class="description">Parse Response</span><pre>parse_response()</pre></a></li>
+<li class="method private "><a href="#method_setMethod" title="setMethod :: Set Method"><span class="description">Set Method</span><pre>setMethod()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_domain" title="$domain :: Domain"><span class="description"></span><pre>$domain</pre></a></li>
+<li class="property public "><a href="#property_end_date" title="$end_date :: End Date"><span class="description"></span><pre>$end_date</pre></a></li>
+<li class="property public "><a href="#property_engine" title="$engine :: Search Engine"><span class="description"></span><pre>$engine</pre></a></li>
+<li class="property public "><a href="#property_format" title="$format :: Format"><span class="description"></span><pre>$format</pre></a></li>
+<li class="property public "><a href="#property_keyword" title="$keyword :: Keyword"><span class="description"></span><pre>$keyword</pre></a></li>
+<li class="property public "><a href="#property_method" title="$method :: Method"><span class="description"></span><pre>$method</pre></a></li>
+<li class="property public "><a href="#property_optional_fields" title="$optional_fields :: Optional Fields"><span class="description"></span><pre>$optional_fields</pre></a></li>
+<li class="property public "><a href="#property_request" title="$request :: API Request"><span class="description"></span><pre>$request</pre></a></li>
+<li class="property public "><a href="#property_required_fields" title="$required_fields :: Required Fields"><span class="description"></span><pre>$required_fields</pre></a></li>
+<li class="property public "><a href="#property_response" title="$response :: API Response"><span class="description"></span><pre>$response</pre></a></li>
+<li class="property public "><a href="#property_start_date" title="$start_date :: Start Date"><span class="description"></span><pre>$start_date</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_api_key" title="$api_key :: API Key"><span class="description"></span><pre>$api_key</pre></a></li>
+<li class="property private "><a href="#property_transport" title="$transport :: Transport"><span class="description"></span><pre>$transport</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_api_version" title="api_version :: API Version"><span class="description">API Version</span><pre>api_version</pre></a></li>
+<li class="constant  "><a href="#constant_endpoint" title="endpoint :: Endpoint"><span class="description">Endpoint</span><pre>endpoint</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\RavenToolsAPI"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/RavenToolsAPI.html">RavenToolsAPI</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Raven Tools API PHP Class</p>
+<div class="details">
+<div class="long_description"><p>The Raven Tools API allows developers to access and modify data within platform profiles and websites. For more information on the API, visit <a href="https://api.raventools.com/docs/">their site</a>.</p>
+
+<pre><code>// Path to the RavenAPI class
+require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
+// Instance to use for calls
+$Raven = new RavenToolsAPI('YOUR_API_KEY');</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="https://github.com/stephenyeargin/raventools-api-php">https://github.com/stephenyeargin/raventools-api-php</a></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/RavenToolsAPI.html">RavenToolsAPI</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.1</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor</h2>
+<pre>__construct(string $api_key, object $transport) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Instance of the Raven Tools API.</p>
+
+<pre><code>$Raven = new RavenToolsAPI('YOUR_API_KEY');</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$api_key</h4>
+<code>string</code><p>API Key provided within Raven</p></div>
+<div class="subelement argument">
+<h4>$transport</h4>
+<code>object</code><p>Optional transport handler</p></div>
+</div></div>
+</div>
+<a id="method_addDomain"></a><div class="element clickable method public method_addDomain" data-toggle="collapse" data-target=".method_addDomain .collapse">
+<h2>Add Domain</h2>
+<pre>addDomain(string $domain, array $engines) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will add the domain provided.</p>
+
+<pre><code>$result = $Raven->addDomain($domain, $engines);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain name you want to add; "www." prefixes are ignored for purposes of matching ranks, but will be stored as part of the domain name for future requests</p>
+</div>
+<div class="subelement argument">
+<h4>$engines</h4>
+<code>array</code><p>Ordered array of search engine ids that you want to track for this domain</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_addKeyword"></a><div class="element clickable method public method_addKeyword" data-toggle="collapse" data-target=".method_addKeyword .collapse">
+<h2>Add Keyword</h2>
+<pre>addKeyword(string $domain, string $keyword) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will add keyword to the domain provided.</p>
+
+<pre><code>$result = $Raven->addKeyword($domain, $keyword);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$keyword</h4>
+<code>string</code><p>Keyword in the Keyword Manager of the given domain</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_addLinks"></a><div class="element clickable method public method_addLinks" data-toggle="collapse" data-target=".method_addLinks .collapse">
+<h2>Add Links</h2>
+<pre>addLinks(string $domain, array | string $links) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request allows you to pass in an array with link data for the links you would like to create and returns a list of new Link IDs.</p>
+
+<pre><code>$result = $Raven->addLinks($domain, $links);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record</p></div>
+<div class="subelement argument">
+<h4>$links</h4>
+<code>array</code><code>string</code><p>Array of link objects or JSON encoded string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_deleteLinks"></a><div class="element clickable method public method_deleteLinks" data-toggle="collapse" data-target=".method_deleteLinks .collapse">
+<h2>Delete Links</h2>
+<pre>deleteLinks(string $domain, array | string $links) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link ID's and if they were properly updated.</p>
+
+<pre><code>$result = $Raven->deleteLinks($domain, $links);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record</p></div>
+<div class="subelement argument">
+<h4>$links</h4>
+<code>array</code><code>string</code><p>Array of link objects or JSON encoded string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Get PHP Object</h2>
+<pre>get(string $method, array $options) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Retrieves a PHP object in response to a particular API method and options.</p>
+
+<pre><code>$result = $Raven->get($method, $options);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Defines specific method to query (part of query string, sets required fields)</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Defines options to be passed to query string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getCompetitors"></a><div class="element clickable method public method_getCompetitors" data-toggle="collapse" data-target=".method_getCompetitors .collapse">
+<h2>Get Competitors</h2>
+<pre>getCompetitors(string $domain) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the available competitors for the domain provided.</p>
+
+<pre><code>$competitors = $Raven->getCompetitors( $domain );</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getDomainInfo"></a><div class="element clickable method public method_getDomainInfo" data-toggle="collapse" data-target=".method_getDomainInfo .collapse">
+<h2>Get Domain Info</h2>
+<pre>getDomainInfo(string $domain) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the search engines for the domain provided.</p>
+
+<pre><code>$domain = $Raven->getDomainInfo($domain);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getDomains"></a><div class="element clickable method public method_getDomains" data-toggle="collapse" data-target=".method_getDomains .collapse">
+<h2>Get Domains</h2>
+<pre>getDomains() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the available domains for the profile associated with your API key.</p>
+
+<pre><code>$domains = $Raven->geDomains();</code></pre></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getEngines"></a><div class="element clickable method public method_getEngines" data-toggle="collapse" data-target=".method_getEngines .collapse">
+<h2>Get Engines</h2>
+<pre>getEngines() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the available search engines for tracking keywords, to be used when adding or modifying domains.</p>
+
+<pre><code>$engines = $Raven->getEngines();</code></pre></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getJSON"></a><div class="element clickable method public method_getJSON" data-toggle="collapse" data-target=".method_getJSON .collapse">
+<h2>Get JSON</h2>
+<pre>getJSON(string $method, array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Retrieves a JSON string in response to a particular API method and options.</p>
+
+<pre><code>$result = $Raven->getJSON($method, $options);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Defines specific method to query (part of query string, sets required fields)</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Defines options to be passed to query string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>- JSON response</div>
+</div></div>
+</div>
+<a id="method_getKeywords"></a><div class="element clickable method public method_getKeywords" data-toggle="collapse" data-target=".method_getKeywords .collapse">
+<h2>Get Keywords</h2>
+<pre>getKeywords(string $domain) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the available keywords for the domain provided.</p>
+
+<pre><code>$keywords = $Raven->getKeywords($domain);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getKeywordsTags"></a><div class="element clickable method public method_getKeywordsTags" data-toggle="collapse" data-target=".method_getKeywordsTags .collapse">
+<h2>Get Keywords with Tags</h2>
+<pre>getKeywordsTags(string $domain) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the available keywords and their tags for the domain provided.</p>
+
+<pre><code>$keywords = $Raven->getKeywordsTags($domain);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getLinkTypes"></a><div class="element clickable method public method_getLinkTypes" data-toggle="collapse" data-target=".method_getLinkTypes .collapse">
+<h2>Get Link Types</h2>
+<pre>getLinkTypes() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will retrieve all of the default link types along with your custom link types your account has in the sytem.</p>
+
+<pre><code>$website_types = $Raven->getWebsiteTypes();</code></pre></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getLinks"></a><div class="element clickable method public method_getLinks" data-toggle="collapse" data-target=".method_getLinks .collapse">
+<h2>Get Links</h2>
+<pre>getLinks(string $domain, string $tag) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the all links for the domain provided.</p>
+
+<pre><code>$links = $Raven->getLinks($domain, $tag);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$tag</h4>
+<code>string</code><p>Filter results to a particular tag, must match exactly (optional)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getProfileInfo"></a><div class="element clickable method public method_getProfileInfo" data-toggle="collapse" data-target=".method_getProfileInfo .collapse">
+<h2>Get Profile Information</h2>
+<pre>getProfileInfo() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return the name and billable keyword usage for the current profile.</p>
+
+<pre><code>$profile_info = $Raven->getProfileInfo();</code></pre></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>Profile information</div>
+</div></div>
+</div>
+<a id="method_getRank"></a><div class="element clickable method public method_getRank" data-toggle="collapse" data-target=".method_getRank .collapse">
+<h2>Get Rank</h2>
+<pre>getRank(string $domain, string $keyword, string $start_date, string $end_date, string | array $engine) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.</p>
+
+<pre><code>$rank = $Raven->getRank( $domain, $keyword, $start_date, $end_date, $engine );</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$keyword</h4>
+<code>string</code><p>Keyword in the Keyword Manager of the given domain</p></div>
+<div class="subelement argument">
+<h4>$start_date</h4>
+<code>string</code><p>Start date for rank</p></div>
+<div class="subelement argument">
+<h4>$end_date</h4>
+<code>string</code><p>End date for rank</p></div>
+<div class="subelement argument">
+<h4>$engine</h4>
+<code>string</code><code>array</code><p>String of 'all' or ordered array of engine_id</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getRankAll"></a><div class="element clickable method public method_getRankAll" data-toggle="collapse" data-target=".method_getRankAll .collapse">
+<h2>Get Ranking for All Keywords</h2>
+<pre>getRankAll(string $domain, string $start_date, string $end_date) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will return a list of matches for a particular domain and date. You can only access results for domains and keywords that have been added to your account, including competitor domains.</p>
+
+<pre><code>$rank_all = $Raven->getRankAll( $domain, $start_date, $end_date );</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$start_date</h4>
+<code>string</code><p>Start date for rank</p></div>
+<div class="subelement argument">
+<h4>$end_date</h4>
+<code>string</code><p>End date for rank</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getRankMaxWeek"></a><div class="element clickable method public method_getRankMaxWeek" data-toggle="collapse" data-target=".method_getRankMaxWeek .collapse">
+<h2>Get Ranking Max for a Week</h2>
+<pre>getRankMaxWeek(string $domain, string $keyword) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request returns the ISO Week number (YYYYWW) and date (YYYY-MM-DD) for the latest week with complete results for all keywords in a domain or a domain/keyword pair. It returns null for date/week and status = 'no data' for domains or domain/keywords that have no available data.</p>
+
+<pre><code>$rank_max_week = $Raven->getRankMaxWeek( $domain, $keyword );</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$keyword</h4>
+<code>string</code><p>Keyword in the Keyword Manager of the given domain</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getWebsiteTypes"></a><div class="element clickable method public method_getWebsiteTypes" data-toggle="collapse" data-target=".method_getWebsiteTypes .collapse">
+<h2>Get Website Types</h2>
+<pre>getWebsiteTypes() : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will retrieve all of the default website types along with any custom website types your account setup in the sytem.</p>
+
+<pre><code>$website_types = $Raven->getWebsiteTypes();</code></pre></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_getXML"></a><div class="element clickable method public method_getXML" data-toggle="collapse" data-target=".method_getXML .collapse">
+<h2>Get XML</h2>
+<pre>getXML(string $method, array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Retrieves an XML string in response to a particular API method and options.</p>
+
+<pre><code>$result = $Raven->getXML($method, $options);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Defines specific method to query (part of query string, sets required fields)</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Defines options to be passed to query string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>XML response</div>
+</div></div>
+</div>
+<a id="method_removeDomain"></a><div class="element clickable method public method_removeDomain" data-toggle="collapse" data-target=".method_removeDomain .collapse">
+<h2>Remove Domain</h2>
+<pre>removeDomain(string $domain) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will permanently remove the specified domain.</p>
+
+<pre><code>$result = $Raven->removeDomain($domain);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_removeKeyword"></a><div class="element clickable method public method_removeKeyword" data-toggle="collapse" data-target=".method_removeKeyword .collapse">
+<h2>Remove Keyword</h2>
+<pre>removeKeyword(string $domain, string $keyword) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request will remove keyword from the domain provided.</p>
+
+<pre><code>$result = $Raven->removeKeyword($domain, $keyword);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>Domain of website within the profile, must match exactly</p></div>
+<div class="subelement argument">
+<h4>$keyword</h4>
+<code>string</code><p>Keyword in the Keyword Manager of the given domain</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_updateLinks"></a><div class="element clickable method public method_updateLinks" data-toggle="collapse" data-target=".method_updateLinks .collapse">
+<h2>Update Links</h2>
+<pre>updateLinks(string $domain, array | string $links) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This request allows you to pass in an array with link data for the links you would like to update and returns a list of the link IDs and if they were properly updated.</p>
+
+<pre><code>$result = $Raven->updateLinks($domain, $links);</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>string</code><p>The domain name you want the links to be added under; This value is optional, it can be passed in on the individual link records as well, but must be passed in either here or on each link record</p></div>
+<div class="subelement argument">
+<h4>$links</h4>
+<code>array</code><code>string</code><p>Array of link objects or JSON encoded string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>API response</div>
+</div></div>
+</div>
+<a id="method_validateAPIKey"></a><div class="element clickable method public method_validateAPIKey" data-toggle="collapse" data-target=".method_validateAPIKey .collapse">
+<h2>Validate API Key</h2>
+<pre>validateAPIKey(string $key) : boolean</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Validates a given API Key before issuing commands.</p>
+
+<pre><code>if (RavenToolsAPI::validateAPIKey('somekey') == true) {
+  echo 'valid key';
+} else {
+  echo 'invalid key';
+}</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to be validated</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True upon success, false if no response</div>
+</div></div>
+</div>
+<a id="method_build_request_url"></a><div class="element clickable method private method_build_request_url" data-toggle="collapse" data-target=".method_build_request_url .collapse">
+<h2>Build Request URL</h2>
+<pre>build_request_url(array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Constructs the URL to send based on the options passed in. Only uses those in the required_fields and optional_fields properties.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An array of options passed from get(), getJSON() or getXML()</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>URL to be requested</div>
+</div></div>
+</div>
+<a id="method_check_json_object"></a><div class="element clickable method private method_check_json_object" data-toggle="collapse" data-target=".method_check_json_object .collapse">
+<h2>Check JSON Object</h2>
+<pre>check_json_object(string $object, string $method) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Encodes array into a JSON string, or passes JSON directly through</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object</h4>
+<code>string</code><p>Object or JSON string to be checked</p></div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Associated method name</p></div>
+</div></div>
+</div>
+<a id="method_check_required"></a><div class="element clickable method private method_check_required" data-toggle="collapse" data-target=".method_check_required .collapse">
+<h2>Check Required Fields</h2>
+<pre>check_required() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Iterates through the 'required_fields' property array to ensure that all necessary properties are set prior to a request being made.</p></div></div></div>
+</div>
+<a id="method_get_response"></a><div class="element clickable method private method_get_response" data-toggle="collapse" data-target=".method_get_response .collapse">
+<h2>Get Response</h2>
+<pre>get_response(string $options) : object | string | boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Primary processing method. Makes the call to build the URL, error checks and processes the cURL request.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>string</code><p>Options passed from get(), getJSON() or getXML()</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code><code>string</code><code>boolean</code>Response from query or false</div>
+</div></div>
+</div>
+<a id="method_parse_response"></a><div class="element clickable method private method_parse_response" data-toggle="collapse" data-target=".method_parse_response .collapse">
+<h2>Parse Response</h2>
+<pre>parse_response(string $response) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Adds an error condition if the response is empty.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$response</h4>
+<code>string</code><p>Response in string format.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Response in string format.</div>
+</div></div>
+</div>
+<a id="method_setMethod"></a><div class="element clickable method private method_setMethod" data-toggle="collapse" data-target=".method_setMethod .collapse">
+<h2>Set Method</h2>
+<pre>setMethod(string $method) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Sets the method for a particular request and defines the required and optional fields for each.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><ul>
+<li>One of the available objects from the Raven API</li>
+</ul>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_domain"> </a><div class="element clickable property public property_domain" data-toggle="collapse" data-target=".property_domain .collapse">
+<h2></h2>
+<pre>$domain </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_end_date"> </a><div class="element clickable property public property_end_date" data-toggle="collapse" data-target=".property_end_date .collapse">
+<h2></h2>
+<pre>$end_date </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_engine"> </a><div class="element clickable property public property_engine" data-toggle="collapse" data-target=".property_engine .collapse">
+<h2></h2>
+<pre>$engine </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_format"> </a><div class="element clickable property public property_format" data-toggle="collapse" data-target=".property_format .collapse">
+<h2></h2>
+<pre>$format </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_keyword"> </a><div class="element clickable property public property_keyword" data-toggle="collapse" data-target=".property_keyword .collapse">
+<h2></h2>
+<pre>$keyword </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_method"> </a><div class="element clickable property public property_method" data-toggle="collapse" data-target=".property_method .collapse">
+<h2></h2>
+<pre>$method </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_optional_fields"> </a><div class="element clickable property public property_optional_fields" data-toggle="collapse" data-target=".property_optional_fields .collapse">
+<h2></h2>
+<pre>$optional_fields </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_request"> </a><div class="element clickable property public property_request" data-toggle="collapse" data-target=".property_request .collapse">
+<h2></h2>
+<pre>$request </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_required_fields"> </a><div class="element clickable property public property_required_fields" data-toggle="collapse" data-target=".property_required_fields .collapse">
+<h2></h2>
+<pre>$required_fields </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_response"> </a><div class="element clickable property public property_response" data-toggle="collapse" data-target=".property_response .collapse">
+<h2></h2>
+<pre>$response </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_start_date"> </a><div class="element clickable property public property_start_date" data-toggle="collapse" data-target=".property_start_date .collapse">
+<h2></h2>
+<pre>$start_date </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_api_key"> </a><div class="element clickable property private property_api_key" data-toggle="collapse" data-target=".property_api_key .collapse">
+<h2></h2>
+<pre>$api_key </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_transport"> </a><div class="element clickable property private property_transport" data-toggle="collapse" data-target=".property_transport .collapse">
+<h2></h2>
+<pre>$transport </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_api_version"> </a><div class="element clickable constant  constant_api_version" data-toggle="collapse" data-target=".constant_api_version .collapse">
+<h2>API Version</h2>
+<pre>api_version </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Version of the Raven API to use</p></div></div></div>
+</div>
+<a id="constant_endpoint"> </a><div class="element clickable constant  constant_endpoint" data-toggle="collapse" data-target=".constant_endpoint .collapse">
+<h2>Endpoint</h2>
+<pre>endpoint </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Endpoint for connecting to the Raven API</p></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a11</a> and<br>
+            generated on 2012-12-01T22:04:38-06:00.<br></footer></div>
+</div>
+</body>
+</html>
