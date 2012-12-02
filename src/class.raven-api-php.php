@@ -15,7 +15,7 @@
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package RavenToolsAPI
- * @version 1.1
+ * @version 1.2
  */
 class RavenToolsAPI {
 
