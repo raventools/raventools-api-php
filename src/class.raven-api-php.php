@@ -191,6 +191,7 @@ class RavenToolsAPI {
    * <code>$engines = $Raven->getEngines();</code>
    *
    * @return object API response
+   * @deprecated Raven to remove on or around 2013-01-02
    */
   public function getEngines() {
     return $this->get('engines');
@@ -199,7 +200,7 @@ class RavenToolsAPI {
   /**
    * Get Domain Info
    *
-   * This request will return the search engines for the domain provided.
+   * This request will return information for the domain provided.
    * <code>$domain = $Raven->getDomainInfo($domain);</code>
    *
    * @param string $domain Domain of website within the profile, must match exactly
@@ -225,6 +226,7 @@ class RavenToolsAPI {
    * @param string $end_date End date for rank
    * @param string|array $engine String of 'all' or ordered array of engine_id
    * @return object API response
+   * @deprecated Raven to remove on or around 2013-01-02
    */
   public function getRank( $domain = '', $keyword = '', $start_date = '', $end_date = '', $engine = 'all' ) {
     if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ) {
@@ -247,6 +249,7 @@ class RavenToolsAPI {
    * @param string $start_date Start date for rank
    * @param string $end_date End date for rank
    * @return object API response
+   * @deprecated Raven to remove on or around 2013-01-02
    */
   public function getRankAll( $domain = '', $start_date = '', $end_date = '' ) {
     if ( empty($domain) || empty($start_date) || empty($end_date) ) {
@@ -268,6 +271,7 @@ class RavenToolsAPI {
    * @param string $domain Domain of website within the profile, must match exactly
    * @param string $keyword Keyword in the Keyword Manager of the given domain
    * @return object API response
+   * @deprecated Raven to remove on or around 2013-01-02
    */
   public function getRankMaxWeek( $domain = '', $keyword = '' ) {
     if ( empty($domain) || empty($keyword) ) {

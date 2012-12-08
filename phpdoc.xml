@@ -2,7 +2,7 @@
 <phpdoc>
     <title>Raven Tools API for PHP</title>
     <parser>
-        <target>output</target>
+        <target>docs</target>
         <markers>
         </markers>
         <extensions>
@@ -11,7 +11,7 @@
         <visibility></visibility>
     </parser>
     <transformer>
-        <target>output</target>
+        <target>docs</target>
     </transformer>
     <transformations>
         <template name="responsive" />
