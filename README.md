@@ -2,7 +2,7 @@
 
 # raven-api-php
 
-A PHP client for the ([Raven Tools API](https://api.raventools.com/docs/)).
+A PHP client for the [Raven Tools API](https://api.raventools.com/docs/).
 
 ## License and Disclaimer
 
@@ -14,7 +14,7 @@ This source code for the client is licensed under the terms found in the `LICENS
 
 ## Using the Library
 
-Full class documentation is available in the `/docs` folder of the repository, which can be viewed in any web browser by opening the `index.html` page. In its most basic example:
+Full class documentation is available in the `/docs` folder of the repository after running `phpdoc` (requires separate installation), which can be viewed in any web browser by opening the `index.html` page. In its most basic example:
 
     // Create an object from the class using your API key
     require 'path/to/raventools-api-php/src/class.raven-api-php.php';
