@@ -12,7 +12,7 @@ namespace RavenTools;
  *
  * <code>// Namespaced class
  * use \RavenTools;
- * // Path to the RavenAPI class
+ * // Path to the RavenToolsAPI class
  * require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
  * // Instance to use for calls
  * $Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
