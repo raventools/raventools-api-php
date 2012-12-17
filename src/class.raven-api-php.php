@@ -8,7 +8,7 @@
  *
  * The Raven Tools API allows developers to access and modify data within platform profiles and websites. For more information on the API, visit [their site](https://api.raventools.com/docs/).
  *
- * <code>// Path to the RavenAPI class
+ * <code>// Path to the RavenToolsAPI class
  * require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
  * // Instance to use for calls
  * $Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
