@@ -15,7 +15,7 @@ namespace RavenTools;
  * // Path to the RavenToolsAPI class
  * require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
  * // Instance to use for calls
- * $Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
+ * $Raven = new \RavenTools\RavenToolsAPI('YOUR_API_KEY');</code>
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package RavenToolsAPI
