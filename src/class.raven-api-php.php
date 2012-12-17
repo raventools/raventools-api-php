@@ -3,12 +3,16 @@
  * Raven Tools API for PHP
  */
 
+namespace RavenTools;
+
 /**
  * Raven Tools API PHP Class
  *
  * The Raven Tools API allows developers to access and modify data within platform profiles and websites. For more information on the API, visit [their site](https://api.raventools.com/docs/).
  *
- * <code>// Path to the RavenAPI class
+ * <code>// Namespaced class
+ * use \RavenTools;
+ * // Path to the RavenAPI class
  * require_once 'path/to/raventools-api-php/src/class.raven-api-php.php';
  * // Instance to use for calls
  * $Raven = new RavenToolsAPI('YOUR_API_KEY');</code>
@@ -526,7 +530,7 @@ class RavenToolsAPI {
     } else {
       $response = $this->getXML($method, $options);
 
-      return new SimpleXMLElement($response);
+      return new \SimpleXMLElement($response);
     }
   }
 
@@ -830,7 +834,7 @@ class RavenToolsAPITransport {
  *
  * @package RavenToolsAPI
  */
-class RavenToolsAPIException extends Exception {
+class RavenToolsAPIException extends \Exception {
 
   /**
    * Constructor

@@ -4,19 +4,19 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 
 	public function setup() {
 		if (defined('USE_MOCK_TRANSPORT') && USE_MOCK_TRANSPORT == true) {
-			$transport = new RavenToolsAPITransportMock();
+			$transport = new \RavenTools\RavenToolsAPITransportMock();
 		} else {
 			$transport = null;
 		}
-		$this->object = new RavenToolsAPI(RAVEN_API_KEY, $transport);
+		$this->object = new \RavenTools\RavenToolsAPI(RAVEN_API_KEY, $transport);
 	}
 
 	public function teardown() {
 	}
 
 	public function testConnectionFailure() {
-		$this->setExpectedException('RavenToolsAPIException');
-		$this->object = new RavenToolsAPI('bogusstring');
+		$this->setExpectedException('\RavenTools\RavenToolsAPIException');
+		$this->object = new \RavenTools\RavenToolsAPI('bogusstring');
 		$result = $this->object->getProfileInfo();
 	}
 

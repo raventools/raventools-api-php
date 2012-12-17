@@ -1,6 +1,8 @@
 <?php
 
-class RavenToolsAPITransportMock extends RavenToolsAPITransport {
+namespace RavenTools;
+
+class RavenToolsAPITransportMock extends \RavenTools\RavenToolsAPITransport {
 
 	public function curl($url, array $get = array(), array $options = array()) {
 		$url_parsed = parse_url($url);
