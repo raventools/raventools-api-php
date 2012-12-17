@@ -18,6 +18,7 @@ Full class documentation is available in the `/docs` folder of the repository af
 
     // Create an object from the class using your API key
     require 'path/to/raventools-api-php/src/class.raven-api-php.php';
+    use \RavenToolsApi;
     $Raven = new RavenToolsAPI( 'YOUR_API_KEY' );
     
     // Make a request using one of the provided methods
