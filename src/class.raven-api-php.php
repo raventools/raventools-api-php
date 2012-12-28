@@ -19,7 +19,7 @@ namespace RavenTools;
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package RavenToolsAPI
- * @version 1.2
+ * @version 1.2.1
  */
 class RavenToolsAPI {
 
@@ -66,11 +66,6 @@ class RavenToolsAPI {
    * End Date
    */
   public $end_date;
-
-  /**
-   * Search Engine
-   */
-  public $engine;
 
   /**
    * Keyword
@@ -126,18 +121,6 @@ class RavenToolsAPI {
   }
 
   /**
-   * Get Profile Information
-   *
-   * This request will return the name and billable keyword usage for the current profile.
-   * <code>$profile_info = $Raven->getProfileInfo();</code>
-   *
-   * @return object Profile information
-   */
-  public function getProfileInfo() {
-    return $this->get('profile_info');
-  }
-
-  /**
    * Get Domains
    *
    * This request will return the available domains for the profile associated with your API key.
@@ -155,20 +138,15 @@ class RavenToolsAPI {
    * This request will add the domain provided.
    * <code>$result = $Raven->addDomain($domain, $engines);</code>
    *
-   * @param string $domain The domain name you want to add; "www." prefixes are ignored for purposes of matching ranks, but will be stored as part of the domain name for future requests
-   * @param array $engines Ordered array of search engine ids that you want to track for this domain
+   * @param string $domain The domain name you want to add; "www." prefixes are ignored, but will be stored as part of the domain name for future requests
    * @return object API response
    */
-  public function addDomain( $domain = '', $engines = array() ) {
+  public function addDomain( $domain = '' ) {
     if (!isset($domain) || empty($domain)) {
-      throw new RavenToolsAPIException('The domain or engine was not set as part of this request. Required by addDomain().', 500);
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by addDomain().', 500);
     }
 
-    if (is_array($engines) && !empty($engines)) {
-      $engines = implode(',', $engines);
-    }
-
-    return $this->get('add_domain', array('domain'=>$domain,'engine_id'=>$engines) );
+    return $this->get('add_domain', array('domain'=>$domain) );
   }
 
   /**
@@ -186,103 +164,6 @@ class RavenToolsAPI {
     }
 
     return $this->get('remove_domain', array('domain'=>$domain) );
-  }
-
-  /**
-   * Get Engines
-   *
-   * This request will return the available search engines for tracking keywords, to be used when adding or modifying domains.
-   * <code>$engines = $Raven->getEngines();</code>
-   *
-   * @return object API response
-   * @deprecated Raven to remove on or around 2013-01-02
-   */
-  public function getEngines() {
-    return $this->get('engines');
-  }
-
-  /**
-   * Get Domain Info
-   *
-   * This request will return information for the domain provided.
-   * <code>$domain = $Raven->getDomainInfo($domain);</code>
-   *
-   * @param string $domain Domain of website within the profile, must match exactly
-   * @return object API response
-   */
-  public function getDomainInfo( $domain = '' ) {
-    if ( empty($domain) ) {
-      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getDomainInfo().', 500);
-    }
-
-    return $this->get('domain_info', array('domain'=>$domain) );
-  }
-
-  /**
-   * Get Rank
-   *
-   * This request will return a list of matches for a particular domain, keyword, search engine, and date range. You can only access results for domains and keywords that have been added to your account, including competitor domains.
-   * <code>$rank = $Raven->getRank( $domain, $keyword, $start_date, $end_date, $engine );</code>
-   *
-   * @param string $domain Domain of website within the profile, must match exactly
-   * @param string $keyword Keyword in the Keyword Manager of the given domain
-   * @param string $start_date Start date for rank
-   * @param string $end_date End date for rank
-   * @param string|array $engine String of 'all' or ordered array of engine_id
-   * @return object API response
-   * @deprecated Raven to remove on or around 2013-01-02
-   */
-  public function getRank( $domain = '', $keyword = '', $start_date = '', $end_date = '', $engine = 'all' ) {
-    if ( empty($domain) || empty($keyword) || empty($start_date) || empty($end_date) || empty($engine) ) {
-      throw new RavenToolsAPIException('The domain, keyword, start date, end date or engine was not set as part of this request. Required by getRank().', 500);
-    }
-
-    $start_date = date('Y-m-d', strtotime($start_date));
-    $end_date = date('Y-m-d', strtotime($end_date));
-
-    return $this->get('rank', array('keyword'=>$keyword,'domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date,'engine'=>$engine) );
-  }
-
-  /**
-   * Get Ranking for All Keywords
-   *
-   * This request will return a list of matches for a particular domain and date. You can only access results for domains and keywords that have been added to your account, including competitor domains.
-   * <code>$rank_all = $Raven->getRankAll( $domain, $start_date, $end_date );</code>
-   *
-   * @param string $domain Domain of website within the profile, must match exactly
-   * @param string $start_date Start date for rank
-   * @param string $end_date End date for rank
-   * @return object API response
-   * @deprecated Raven to remove on or around 2013-01-02
-   */
-  public function getRankAll( $domain = '', $start_date = '', $end_date = '' ) {
-    if ( empty($domain) || empty($start_date) || empty($end_date) ) {
-      throw new RavenToolsAPIException('The domain, start date or end date was not set as part of this request. Required by getRankAll().', 500);
-    }
-
-    $start_date = date('Y-m-d', strtotime($start_date));
-    $end_date = date('Y-m-d', strtotime($end_date));
-
-    return $this->get('rank_all', array('domain'=>$domain,'start_date'=>$start_date,'end_date'=>$end_date) );
-  }
-
-  /**
-   * Get Ranking Max for a Week
-   *
-   * This request returns the ISO Week number (YYYYWW) and date (YYYY-MM-DD) for the latest week with complete results for all keywords in a domain or a domain/keyword pair. It returns null for date/week and status = 'no data' for domains or domain/keywords that have no available data.
-   * <code>$rank_max_week = $Raven->getRankMaxWeek( $domain, $keyword );</code>
-   *
-   * @param string $domain Domain of website within the profile, must match exactly
-   * @param string $keyword Keyword in the Keyword Manager of the given domain
-   * @return object API response
-   * @deprecated Raven to remove on or around 2013-01-02
-   */
-  public function getRankMaxWeek( $domain = '', $keyword = '' ) {
-    if ( empty($domain) || empty($keyword) ) {
-      throw new RavenToolsAPIException('The domain or keyword was not set as part of this request. Required by getRankMaxWeek().', 500);
-    }
-
-    return $this->get('rank_max_week', array('domain'=>$domain,'keyword'=>$keyword) );
   }
 
   /**
@@ -580,40 +461,15 @@ class RavenToolsAPI {
 
     switch ($method) {
 
-      case 'rank':
-        $this->required_fields = array('domain', 'keyword', 'start_date', 'end_date', 'engine');
-      break;
-
-      case 'rank_all':
-        $this->required_fields = array('domain', 'start_date');
-      break;
-
       case 'domains':
         $this->required_fields = array();
       break;
 
       case 'add_domain':
-        $this->required_fields = array('domain', 'engine_id');
+        $this->required_fields = array('domain');
       break;
 
       case 'remove_domain':
-        $this->required_fields = array('domain');
-      break;
-
-      case 'rank_max_week':
-        $this->required_fields = array('domain');
-        $this->optional_fields = array('keyword');
-      break;
-
-      case 'engines':
-        $this->required_fields = array();
-      break;
-
-      case 'profile_info':
-        $this->required_fields = array();
-      break;
-
-      case 'domain_info':
         $this->required_fields = array('domain');
       break;
 
