@@ -287,7 +287,7 @@ class RavenToolsAPI {
    * Get Link Types
    *
    * This request will retrieve all of the default link types along with your custom link types your account has in the sytem.
-   * <code>$website_types = $Raven->getWebsiteTypes();</code>
+   * <code>$link_types = $Raven->getLinkTypes();</code>
    *
    * @return object API response
    */
