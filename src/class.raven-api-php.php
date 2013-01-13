@@ -19,7 +19,7 @@ namespace RavenTools;
  *
  * @link https://github.com/stephenyeargin/raventools-api-php
  * @package RavenToolsAPI
- * @version 1.2.1
+ * @version 1.2.2
  */
 class RavenToolsAPI {
 
@@ -121,6 +121,35 @@ class RavenToolsAPI {
   }
 
   /**
+   * Get Profile Information
+   *
+   * This request will return the name of the profile associated with your API key.
+   * <code>$profile = $Raven->getProfile();</code>
+   *
+   * @return object API Response
+   */
+  public function getProfile() {
+    return $this->get('profile_info');
+  }
+
+  /**
+   * Get Domain Information
+   *
+   * This request will return the domain and description of the requested domain.
+   * <code>$domain = $Raven->getDomain($domain);</code>
+   *
+   * @param string $domain The domain you want to identify
+   * @return object API response
+   */
+  public function getDomain($domain = '') {
+    if (!isset($domain) || empty($domain)) {
+      throw new RavenToolsAPIException('The domain was not set as part of this request. Required by getDomain().', 500);
+    }
+
+    return $this->get('domain_info', array('domain'=>$domain) );
+  }
+
+  /**
    * Get Domains
    *
    * This request will return the available domains for the profile associated with your API key.
@@ -136,9 +165,9 @@ class RavenToolsAPI {
    * Add Domain
    *
    * This request will add the domain provided.
-   * <code>$result = $Raven->addDomain($domain, $engines);</code>
+   * <code>$result = $Raven->addDomain($domain);</code>
    *
-   * @param string $domain The domain name you want to add; "www." prefixes are ignored, but will be stored as part of the domain name for future requests
+   * @param string $domain The domain name you want to add
    * @return object API response
    */
   public function addDomain( $domain = '' ) {
@@ -460,6 +489,14 @@ class RavenToolsAPI {
     $this->method = $method;
 
     switch ($method) {
+
+      case 'profile_info':
+        $this->required_fields = array();
+      break;
+
+      case 'domain_info':
+        $this->required_fields = array('domain');
+      break;
 
       case 'domains':
         $this->required_fields = array();

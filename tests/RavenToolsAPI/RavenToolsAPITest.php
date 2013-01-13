@@ -20,6 +20,19 @@ class RavenToolsAPITest extends PHPUnit_Framework_TestCase {
 		$result = $this->object->getDomains();
 	}
 
+	public function testGetProfile() {
+		$result = $this->object->getProfile();
+		$this->assertNotNull($result->name);
+	}
+
+	public function testGetDomain() {
+		$domains = $this->object->getDomains();
+		$result = $this->object->getDomain($domains[0]);
+		$this->assertInternalType('object', $result);
+		$this->assertNotNull($result->domain);
+		$this->assertNotNull($result->description);
+	}
+
 	public function testGetDomains() {
 		$result = $this->object->getDomains();
 		$this->assertInternalType('array', $result);
