@@ -17,6 +17,12 @@
 		<log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
 	</logging>
 
+	<filter>
+	  <whitelist processUncoveredFilesFromWhitelist="true">
+	    <directory suffix=".php">src/</directory>
+	  </whitelist>
+	</filter>
+
 	<php>
 	  <const name="RAVEN_API_KEY" value="123456789"/>
 	  <const name="USE_MOCK_TRANSPORT" value="true"/>

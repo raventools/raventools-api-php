@@ -459,20 +459,17 @@ class RavenToolsAPI {
    * }</code>
    *
    * @param string $key Key to be validated
+   * @param object $transport Optional transport handler class
    * @return boolean True upon success, false if no response
    */
-  public static function validateAPIKey($key) {
-    $testing = new self($key);
+  public static function validateAPIKey($key, $transport = null) {
+    $testing = new self($key, $transport);
     try {
       $result = $testing->get('domains');
     } catch (Exception $e) {
-      return false;
     }
-    if (is_array($result)) {
-      return true;
-    } else {
-      return false;
-    }
+
+    return (boolean) (is_array($result));
   }
 
   /* Private methods */
